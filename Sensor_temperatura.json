@@ -1,0 +1,1644 @@
+[
+    {
+        "id": "ece4d877ccbfed14",
+        "type": "subflow",
+        "name": "Actualización_FOTA",
+        "info": "Permite la actualización de la placa a distancia",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "0496dc6092b9a182",
+        "type": "http response",
+        "z": "ece4d877ccbfed14",
+        "name": "OTA Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 2780,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "64072056e83d4622",
+        "type": "http in",
+        "z": "ece4d877ccbfed14",
+        "name": "OTA Manager",
+        "url": "/esp8266-ota",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 95.49576568603516,
+        "y": 665.1784801483154,
+        "wires": [
+            [
+                "9e8b26238d3bdb88"
+            ]
+        ]
+    },
+    {
+        "id": "b38d9e803e482814",
+        "type": "file",
+        "z": "ece4d877ccbfed14",
+        "name": "Save md5 Checksum",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 1547.4400024414062,
+        "y": 862.7261829376221,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "22b078addab39120",
+        "type": "file in",
+        "z": "ece4d877ccbfed14",
+        "name": "Read firmware",
+        "filename": "",
+        "format": "",
+        "x": 849.5235595703125,
+        "y": 863.5594959259033,
+        "wires": [
+            [
+                "048ad7b474c0c96d"
+            ]
+        ]
+    },
+    {
+        "id": "40f40846feb90352",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Extract filename",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "firmware.directory",
+                "tot": "flow"
+            },
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": "req.files.firmware[0].originalname",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "req",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "res",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 626.815185546875,
+        "y": 864.8094959259033,
+        "wires": [
+            [
+                "22b078addab39120"
+            ]
+        ]
+    },
+    {
+        "id": "b7a59ca8b9cdebaf",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "bin$",
+                "fromt": "re",
+                "to": "md5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1233.065185546875,
+        "y": 863.1428089141846,
+        "wires": [
+            [
+                "b38d9e803e482814"
+            ]
+        ]
+    },
+    {
+        "id": "8fc6367fe459fb0a",
+        "type": "comment",
+        "z": "ece4d877ccbfed14",
+        "name": "Firmware Upgrade",
+        "info": "The system determines which firmware to send based\non the MAC address, version, and MD5 headers in the\nrequest from the ESP8266.\n\nFirstly, it checks if a firmware hash file with \nthe MAC address as the name exists, or else if a \nfirmware file with the version as the name exists.\nIf neither exist then no update is available.\n\nIt then reads the corresponding MD5 hash from the\nhash file and compares to the MD5 hash in the\nrequest.  If they match then the firmware is up\nto date and no update is required.\n\nOtherwise, it sends the contents of the firmware\nbin file and the MD5 hash value.",
+        "x": 110.940185546875,
+        "y": 62.89280891418457,
+        "wires": []
+    },
+    {
+        "id": "6d799f92060dcc89",
+        "type": "comment",
+        "z": "ece4d877ccbfed14",
+        "name": "Firmware Management",
+        "info": "",
+        "x": 117.940185546875,
+        "y": 558.8928089141846,
+        "wires": []
+    },
+    {
+        "id": "7f949435696b8db0",
+        "type": "template",
+        "z": "ece4d877ccbfed14",
+        "name": "Firmware Manager",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<html>\n    <head>\n        <title>ESP8266 OTA Firmware Manager</title>\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\">\n        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>\n        <script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n        <style>\n            .file-btn-grp {\n                display: none;\n            }\n            body {\n                background-color: #f6f6f6;\n            }\n            .text_holder {\n                display: block;\n                max-width: 100%;\n                word-wrap: break-word;\n                line-height: 30px;\n            }\n            #main {\n                margin-top: 50px;\n                background-color: #ffffff;\n                border-radius: 5px;\n                width: 70%;\n                min-width: 500px;\n                border: 1px solid #545454;\n            }\n            .alert {\n                margin-top: 10px;\n                margin-bottom: 5px;\n            }\n            .link {\n                font-style: italic;\n            }\n            .listentry {\n                display: none;\n                list-style-type: none;\n            }\n        </style>\n\n    </head>\n    <body>\n        <div class=\"container\" id=\"main\">\n            <h1><small>ESP8266 OTA Firmware Manager</small></h1>\n            <h2><small>Upload New Firmware</small></h2>\n\n            <form role =\"form\" id=\"main_input_box\" action=\"esp8266-ota\" method=\"POST\" enctype=\"multipart/form-data\" class=\"form-inline\">\n                <input type=\"file\" accept=\".bin\" class=\"hidden\" id=\"fileUpload\" name=\"firmware\" placeholder=\"firmware.bin\">\n                <div class=\"form-group\">\n                <div class=\"input-group\">\n                    <span class=\"input-group-btn\">\n                        <button id=\"browse\" type=\"button\" class=\"btn btn-primary\">Browse...</button>\n                    </span>\n                    <input id=\"filename\" size=100 readonly=\"\" class=\"form-control\" placeholder=\"Firmware.bin\">\n                    <span class=\"input-group-btn\">\n                        <input type=\"submit\" value=\"Upload\" class=\"btn btn-primary add_button\">\n                    </span>\n                </div>\n                </div>\n            </form>\n\n            <h2><small>Current Firmware</small></h2>\n            <ul class=\"list-group\" id=\"list_of_items\">\n            </ul>\n        </div>\n\n        <div id=\"linkModal\" class=\"modal fade\" role=\"dialog\">\n            <div class=\"modal-dialog\">\n        \n                <!-- Modal content-->\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n                        <h4 class=\"modal-title\">Create Symbolic Link</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <form class=\"form-horizontal\" id=\"linkForm\" role=\"form\" action=\"#\" method=\"POST\">\n                            <div class=\"form-group\">\n                                <label class=\"control-label  col-sm-2\" for=\"linkName\">Link:</label> \n                                <div class=\"col-sm-10\">\n                                    <input id=\"linkName\" name=\"linkName\" class=\"form-control\"/>\n                                </div>\n                            </div>\n                            <div class=\"form-group\">\n                                <label class=\"control-label  col-sm-2\" for=\"linkFile\">To:</label> \n                                <div class=\"col-sm-10\">\n                                    <input class=\"form-control\" id=\"linkFile\" name=\"linkFile\"/>\n                                </div>\n                            </div>\n                        </form>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"submit\" class=\"btn btn-success link-create\">Create</button>\n                        <button type=\"button\" class=\"btn btn-warning\" data-dismiss=\"modal\">Cancel</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <script>\n\n            var deleteButton = \"<button id='delete' class='btn btn-warning'>Delete</button>\";\n            var linkButton = \"<button id='link' class='btn btn-success'>Link</button>\";\n            var oneButton = \"<div class='file-btn-grp btn-group pull-right'>\" + deleteButton + \"</div>\";\n            var twoButtons = \"<div class='file-btn-grp btn-group pull-right'>\" + deleteButton + linkButton + \"</div>\";\n            \n            function addListEntry(list, filename, linkname) {\n            \n                var entry;\n                \n                if (linkname === undefined) {\n                    entry = $(\"<li class='listentry list-group-item'><div class='text_holder'><span>\" \n                    + filename + \"</span>\" + twoButtons + \"</div></li>\");\n                } else {\n                    entry = $(\"<li class='listentry list-group-item'><div class='text_holder'><span class='link'>\" \n                    + filename + \"</span> <span class='glyphicon glyphicon-arrow-right'></span> \" \n                    + linkname + oneButton + \"</div></li>\");\n                }\n                \n                entry.mouseover(function(){\n                    $(this).find(\".btn-group\").fadeIn(\"fast\");\n                });\n                entry.mouseleave(function(){\n                    $(this).find(\".btn-group\").fadeOut(\"slow\");\n                });\n                \n                entry.on(\"click\", \"button#delete\", function(){\n                    var listItem = this.parentElement.parentElement.parentElement;\n                    var file = this.parentElement.parentElement.childNodes[0].childNodes[0].data;\n                    $.ajax({\n                        type: 'DELETE',\n                        data: {\"filename\": file},\n                        success: function(result) {\n                            $(listItem).fadeOut(\"slow\", function(){\n                                listItem.remove();\n                            });\n                        },\n                        error: function(result) {\n                            $(listItem).append(\"<div class='alert alert-danger'>\"\n                                + \"<a href='#' class='close' data-dismiss='alert'\"\n                                + \"aria-label='close'>&times;</a>\"\n                                + result.responseText + \"</div>\");\n                        }\n                    });\n                });\n           \n                entry.on(\"click\", \"button#link\", function(){\n                    var file = this.parentElement.parentElement.childNodes[0].childNodes[0].data;\n                    $(\"#linkName\").val(\"\");\n                    $(\"#linkFile\").prop(\"disabled\", true).val(file);\n                    $(\"#linkName\").parent().removeClass(\"has-error\");\n                    $(\"#linkModal\").modal();\n                    $('#linkModal').on('shown.bs.modal', function () {\n                        $('#linkName').focus();\n                    });\n                });\n                \n                if (list.children().length == 0) {\n                    list.append(entry);\n                    entry.fadeIn(\"slow\");\n                    return;\n                }\n\n                if (filename < $(\"li:first span:first\", list).text()) {\n                    $(\"li:first\", list).before(entry);\n                    entry.fadeIn(\"slow\");\n                    return;\n                }\n                if (filename > $(\"li:last span:first\", list).text()) {\n                    $(\"li:last\", list).after(entry);\n                    entry.fadeIn(\"slow\");\n                    return;\n                }\n                \n                var count = 0;\n                var $li = $(\"li\", list);\n                do {\n                    var index = parseInt($li.length / 2);\n                    var $compare = $li.eq(index);\n                    var compare = $(\"span:first\",$compare).text();\n                    if (filename === compare) {\n                        break;\n                    }\n                    else if (filename > compare) {\n                        $li = $li.slice(index, $li.length);\n                    } else {\n                        $li = $li.slice(0, index);\n                    }\n                } while ($li.length > 1);\n\n                if (filename === compare) {\n                    $compare.slideUp(\"fast\").slideDown(\"slow\");\n                    return;\n                } else if (filename < compare) { \n                    entry.insertBefore($compare); \n                } else { \n                    entry.insertAfter($compare); \n                }\n                entry.slideDown(\"slow\");\n            }\n            \n            \n            var files = String(\"{{payload.files}}\").split(',');\n            var links = String(\"{{payload.links}}\").split(',');\n            \n            var list_of_items = $(\"#list_of_items\");\n            \n            files.forEach(function(file,index) {\n                if (links[index] == \"\") {\n                    addListEntry(this, file.slice(0,-4));\n                } else {\n                    addListEntry(this, file.slice(0,-4), links[index].slice(0,-4));\n                }\n            },list_of_items);\n           \n           \n            $(\"#linkModal\").on(\"click\", \"button.link-create\", function(event){\n               event.preventDefault();\n               if ($(\"#linkName\").val() == \"\") {\n                    $('#linkName').focus();\n                    $('#linkName').parent().addClass(\"has-error\");\n                    return false;\n               }\n               $(\"#linkFile\").prop(\"disabled\",false);               \n               $.ajax({\n                    type: 'PUT',\n                    data: $(\"#linkForm\").serialize(),\n                    success: function(result) {\n                        $(\"#linkModal\").modal('hide');\n                        addListEntry(list_of_items, $('#linkName').val(), $('#linkFile').val());\n                    },\n                    error: function(result) {\n                        $(\"#linkFile\").prop(\"disabled\", true);\n                        $('#linkName').focus();\n                        $('#linkName').parent().addClass(\"has-error\");\n                        $(linkForm).append(\"<div id='linkError' class='alert alert-danger'>\"\n                             + \"<a href='#' class='close' data-dismiss='alert'\"\n                             + \"aria-label='close'>&times;</a>\"\n                             + result.responseText + \"</div>\");\n                    }\n                });\n            });\n            \n            $(\"#browse\").on('click', function () {\n                fileUpload.click();\n            });\n            \n            $(\"#fileUpload\").on('change', function () {\n                $(\"#filename\").val($(\"#fileUpload\").val().split('/').pop().split('\\\\').pop());\n            });\n            \n            var frm = $(\"#main_input_box\");\n            \n            frm.submit( function( e ) {\n                e.preventDefault();\n                if ($('#fileUpload').val() == \"\") return null;\n                $.ajax( {\n                    url: frm.attr('action'),\n                    type: frm.attr('method'),\n                    data: new FormData( this ),\n                    processData: false,\n                    contentType: false,\n                    success: function(result) {\n                        addListEntry(list_of_items, $('#fileUpload').val().slice(0,-4).split('\\\\').pop());\n                        $('#fileUpload').val('');\n                        $(':text').val('');\n                    },\n                    error: function(result) {\n                        $(\"#main_input_box\").append(\"<div class='alert alert-danger'>\"\n                             + \"<a href='#' class='close' data-dismiss='alert'\"\n                             + \"aria-label='close'>&times;</a>\"\n                             + result.responseText + \"</div>\");\n                    }\n\n                });\n            });\n        </script>\n    </body>\n</html>",
+        "output": "str",
+        "x": 1388.7735595703125,
+        "y": 662.7063465118408,
+        "wires": [
+            [
+                "0496dc6092b9a182"
+            ]
+        ]
+    },
+    {
+        "id": "cb9fa4bf0c234763",
+        "type": "http in",
+        "z": "ece4d877ccbfed14",
+        "name": "OTA Delete",
+        "url": "/esp8266-ota",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90.565185546875,
+        "y": 950.6428089141846,
+        "wires": [
+            [
+                "1e833bcf7a1fa57d"
+            ]
+        ]
+    },
+    {
+        "id": "896ddaa3c395e9fb",
+        "type": "catch",
+        "z": "ece4d877ccbfed14",
+        "name": "File Error",
+        "scope": [
+            "7285da793c10858b",
+            "7ed033e825ed7458",
+            "c136467f6616699a",
+            "4c211001ea8c0fe4",
+            "f8b3112120837509"
+        ],
+        "x": 1878.1067428588867,
+        "y": 822.2261247634888,
+        "wires": [
+            [
+                "0ce48ec5b41e9869"
+            ]
+        ]
+    },
+    {
+        "id": "0ce48ec5b41e9869",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "500",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2166.440185546875,
+        "y": 807.8928089141846,
+        "wires": [
+            [
+                "0496dc6092b9a182"
+            ]
+        ]
+    },
+    {
+        "id": "d54f33f048a59545",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Change to MD5 filename",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.filename",
+                "pt": "msg",
+                "from": "bin",
+                "fromt": "str",
+                "to": "md5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1886.6068420410156,
+        "y": 953.5594358444214,
+        "wires": [
+            [
+                "7ed033e825ed7458"
+            ]
+        ]
+    },
+    {
+        "id": "f1c7109192b421a5",
+        "type": "http in",
+        "z": "ece4d877ccbfed14",
+        "name": "OTA Link",
+        "url": "/esp8266-ota",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 91.440185546875,
+        "y": 1058.3928089141846,
+        "wires": [
+            [
+                "a0d13fa3a6e7f2f9"
+            ]
+        ]
+    },
+    {
+        "id": "a0d13fa3a6e7f2f9",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Extract filename",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.linkName",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": ".bin",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.linkFile",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": ".bin",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1392.440185546875,
+        "y": 1060.8928089141846,
+        "wires": [
+            [
+                "c136467f6616699a"
+            ]
+        ]
+    },
+    {
+        "id": "28c5f2ed6f37c749",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Change to MD5 Filename",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.linkName",
+                "pt": "msg",
+                "from": "bin$",
+                "fromt": "re",
+                "to": "md5",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.linkFile",
+                "pt": "msg",
+                "from": "bin$",
+                "fromt": "re",
+                "to": "md5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1915.440185546875,
+        "y": 1061.8928089141846,
+        "wires": [
+            [
+                "4c211001ea8c0fe4"
+            ]
+        ]
+    },
+    {
+        "id": "1e833bcf7a1fa57d",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Extract filename",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.filename",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": ".bin",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1389.940185546875,
+        "y": 954.3928089141846,
+        "wires": [
+            [
+                "7285da793c10858b"
+            ]
+        ]
+    },
+    {
+        "id": "283c0a41bc3f2d6f",
+        "type": "http response",
+        "z": "ece4d877ccbfed14",
+        "name": "OTA Response",
+        "x": 3217.5,
+        "y": 382.9553699493408,
+        "wires": []
+    },
+    {
+        "id": "da4ce4dfda4712ca",
+        "type": "file in",
+        "z": "ece4d877ccbfed14",
+        "name": "Load Firmware",
+        "filename": "",
+        "format": "",
+        "sendError": false,
+        "x": 2594.439971923828,
+        "y": 416.7768096923828,
+        "wires": [
+            [
+                "283c0a41bc3f2d6f",
+                "c77884e6fab4f761"
+            ]
+        ]
+    },
+    {
+        "id": "0ed8538b23db5530",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "No Update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "304",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2963.547607421875,
+        "y": 275.4196319580078,
+        "wires": [
+            [
+                "283c0a41bc3f2d6f"
+            ]
+        ]
+    },
+    {
+        "id": "1f6d7b35bfcc41c6",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Forbidden",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "403",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Forbidden",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2941.43994140625,
+        "y": 152.74107360839844,
+        "wires": [
+            [
+                "283c0a41bc3f2d6f"
+            ]
+        ]
+    },
+    {
+        "id": "c77884e6fab4f761",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "Update sent",
+        "active": true,
+        "console": "false",
+        "complete": "req.headers.x-esp8266-sta-mac",
+        "x": 2939.4402465820312,
+        "y": 422.84828186035156,
+        "wires": []
+    },
+    {
+        "id": "a9143a56813efc09",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Save MD5 Hash",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers.x-MD5",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "md5",
+                "fromt": "str",
+                "to": "bin",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2383.225975036621,
+        "y": 403.91967582702637,
+        "wires": [
+            [
+                "da4ce4dfda4712ca"
+            ]
+        ]
+    },
+    {
+        "id": "4bcda4e81e431376",
+        "type": "switch",
+        "z": "ece4d877ccbfed14",
+        "name": "Update type",
+        "property": "req.headers.x-esp8266-mode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "spiffs",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sketch",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "outputs": 2,
+        "x": 481.9581604003906,
+        "y": 245.41966247558594,
+        "wires": [
+            [
+                "0ed8538b23db5530"
+            ],
+            [
+                "587c17c14431f860"
+            ]
+        ]
+    },
+    {
+        "id": "c137d990b3a7e050",
+        "type": "switch",
+        "z": "ece4d877ccbfed14",
+        "name": "Compare MD5 hash",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "req.headers.x-esp8266-sketch-md5",
+                "vt": "msg"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "outputs": 2,
+        "x": 1952.850830078125,
+        "y": 359.02684020996094,
+        "wires": [
+            [
+                "0ed8538b23db5530",
+                "757a56975b237a7a"
+            ],
+            [
+                "a9143a56813efc09",
+                "856d4432586f7b53"
+            ]
+        ]
+    },
+    {
+        "id": "27295d3288da4bbd",
+        "type": "catch",
+        "z": "ece4d877ccbfed14",
+        "name": "File error",
+        "scope": [
+            "da4ce4dfda4712ca",
+            "0bd127a9eb16d370"
+        ],
+        "x": 2635.7974243164062,
+        "y": 365.4196319580078,
+        "wires": [
+            [
+                "0ed8538b23db5530",
+                "2baae42eb27bf23a"
+            ]
+        ]
+    },
+    {
+        "id": "da19ced44e72b873",
+        "type": "switch",
+        "z": "ece4d877ccbfed14",
+        "name": "Check user agent",
+        "property": "req.headers.user-agent",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "ESP8266-http-Update",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "outputs": 2,
+        "x": 318.65454864501953,
+        "y": 151.8482208251953,
+        "wires": [
+            [
+                "1f6d7b35bfcc41c6"
+            ],
+            [
+                "4bcda4e81e431376"
+            ]
+        ]
+    },
+    {
+        "id": "587c17c14431f860",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Get MAC hash filename",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "firmware.directory",
+                "tot": "flow"
+            },
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": "req.headers.x-esp8266-sta-mac",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": ".md5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 711.0830307006836,
+        "y": 371.8482189178467,
+        "wires": [
+            [
+                "4e1ca12a332840eb"
+            ]
+        ]
+    },
+    {
+        "id": "0bd127a9eb16d370",
+        "type": "file in",
+        "z": "ece4d877ccbfed14",
+        "name": "Load Hash",
+        "filename": "",
+        "format": "utf8",
+        "sendError": false,
+        "x": 1741.850814819336,
+        "y": 358.66969299316406,
+        "wires": [
+            [
+                "c137d990b3a7e050"
+            ]
+        ]
+    },
+    {
+        "id": "533ff50ac713fd0e",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Get Version hash filename",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "firmware.directory",
+                "tot": "flow"
+            },
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": "req.headers.x-esp8266-version",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "$",
+                "fromt": "re",
+                "to": ".md5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1191.2259521484375,
+        "y": 476.4910125732422,
+        "wires": [
+            [
+                "126e34e52d238acd",
+                "961fae60b2ad8923"
+            ]
+        ]
+    },
+    {
+        "id": "2baae42eb27bf23a",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "Firmware file error",
+        "active": false,
+        "console": "false",
+        "complete": "error",
+        "x": 2898.6544799804688,
+        "y": 363.99107360839844,
+        "wires": []
+    },
+    {
+        "id": "72ed3df5336128d9",
+        "type": "http in",
+        "z": "ece4d877ccbfed14",
+        "name": "OTA Request",
+        "url": "/esp8266-ota/update",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 82.440185546875,
+        "y": 151.8482208251953,
+        "wires": [
+            [
+                "da19ced44e72b873",
+                "9b50f2b7f2e52eb5"
+            ]
+        ]
+    },
+    {
+        "id": "bc1dd4167c80ed1a",
+        "type": "switch",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "property": "req.headers.x-esp8266-version",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 694.9044189453125,
+        "y": 483.63389587402344,
+        "wires": [
+            [
+                "533ff50ac713fd0e"
+            ],
+            [
+                "7e5a34eef4c2539e"
+            ]
+        ]
+    },
+    {
+        "id": "7e5a34eef4c2539e",
+        "type": "change",
+        "z": "ece4d877ccbfed14",
+        "name": "Version in Request",
+        "rules": [
+            {
+                "t": "set",
+                "p": "req.headers.x-esp8266-version",
+                "pt": "msg",
+                "to": "req.params.version",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 904.3687133789062,
+        "y": 549.7053375244141,
+        "wires": [
+            [
+                "533ff50ac713fd0e"
+            ]
+        ]
+    },
+    {
+        "id": "9b50f2b7f2e52eb5",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "Update req",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 253.6545867919922,
+        "y": 252.56248474121094,
+        "wires": []
+    },
+    {
+        "id": "baac45062cb2369a",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1299.213680267334,
+        "y": 399.07252502441406,
+        "wires": []
+    },
+    {
+        "id": "97c9553b9ce7a01d",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1322.463623046875,
+        "y": 310.93187141418457,
+        "wires": []
+    },
+    {
+        "id": "961fae60b2ad8923",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "filename",
+        "x": 1400.463623046875,
+        "y": 571.9318714141846,
+        "wires": []
+    },
+    {
+        "id": "7cc439db32f5afcb",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "filename",
+        "x": 1777.463623046875,
+        "y": 540.9318714141846,
+        "wires": []
+    },
+    {
+        "id": "6b60fbed5251a5c6",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "filename",
+        "x": 1796.463623046875,
+        "y": 423.93187141418457,
+        "wires": []
+    },
+    {
+        "id": "757a56975b237a7a",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "filename",
+        "x": 2155.463623046875,
+        "y": 295.93187141418457,
+        "wires": []
+    },
+    {
+        "id": "856d4432586f7b53",
+        "type": "debug",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "filename",
+        "x": 2177.463623046875,
+        "y": 522.9318714141846,
+        "wires": []
+    },
+    {
+        "id": "f8b3112120837509",
+        "type": "fs-ops-move",
+        "z": "ece4d877ccbfed14",
+        "name": "Store firmware",
+        "sourcePath": "req.files.firmware[0].destination",
+        "sourcePathType": "msg",
+        "sourceFilename": "req.files.firmware[0].filename",
+        "sourceFilenameType": "msg",
+        "destPath": "firmware.directory",
+        "destPathType": "flow",
+        "destFilename": "req.files.firmware[0].originalname",
+        "destFilenameType": "msg",
+        "link": false,
+        "x": 373.33303451538086,
+        "y": 835.2260646820068,
+        "wires": [
+            [
+                "40f40846feb90352",
+                "0496dc6092b9a182"
+            ]
+        ]
+    },
+    {
+        "id": "c136467f6616699a",
+        "type": "fs-ops-move",
+        "z": "ece4d877ccbfed14",
+        "name": "Link firmware",
+        "sourcePath": "",
+        "sourcePathType": "str",
+        "sourceFilename": "payload.linkFile",
+        "sourceFilenameType": "msg",
+        "destPath": "firmware.directory",
+        "destPathType": "flow",
+        "destFilename": "payload.linkName",
+        "destFilenameType": "msg",
+        "link": true,
+        "x": 1651.940185546875,
+        "y": 1060.8928089141846,
+        "wires": [
+            [
+                "28c5f2ed6f37c749"
+            ]
+        ]
+    },
+    {
+        "id": "4c211001ea8c0fe4",
+        "type": "fs-ops-move",
+        "z": "ece4d877ccbfed14",
+        "name": "Link MD5",
+        "sourcePath": "",
+        "sourcePathType": "str",
+        "sourceFilename": "payload.linkFile",
+        "sourceFilenameType": "msg",
+        "destPath": "firmware.directory",
+        "destPathType": "flow",
+        "destFilename": "payload.linkName",
+        "destFilenameType": "msg",
+        "link": true,
+        "x": 2159.940185546875,
+        "y": 1060.8928089141846,
+        "wires": [
+            [
+                "0496dc6092b9a182"
+            ]
+        ]
+    },
+    {
+        "id": "7285da793c10858b",
+        "type": "fs-ops-delete",
+        "z": "ece4d877ccbfed14",
+        "name": "Delete firmware",
+        "path": "firmware.directory",
+        "pathType": "flow",
+        "filename": "payload.filename",
+        "filenameType": "msg",
+        "x": 1636.0652313232422,
+        "y": 953.4760866165161,
+        "wires": [
+            [
+                "d54f33f048a59545"
+            ]
+        ]
+    },
+    {
+        "id": "7ed033e825ed7458",
+        "type": "fs-ops-delete",
+        "z": "ece4d877ccbfed14",
+        "name": "Delete MD5 Hash",
+        "path": "firmware.directory",
+        "pathType": "flow",
+        "filename": "payload.filename",
+        "filenameType": "msg",
+        "x": 2178.273391723633,
+        "y": 953.5593967437744,
+        "wires": [
+            [
+                "0496dc6092b9a182"
+            ]
+        ]
+    },
+    {
+        "id": "126e34e52d238acd",
+        "type": "fs-ops-access",
+        "z": "ece4d877ccbfed14",
+        "name": "Check for MD5 file exists",
+        "path": "",
+        "pathType": "str",
+        "filename": "filename",
+        "filenameType": "msg",
+        "read": true,
+        "write": false,
+        "throwerror": false,
+        "x": 1504.7258911132812,
+        "y": 476.5624237060547,
+        "wires": [
+            [
+                "0bd127a9eb16d370",
+                "6b60fbed5251a5c6"
+            ],
+            [
+                "0ed8538b23db5530",
+                "7cc439db32f5afcb"
+            ]
+        ]
+    },
+    {
+        "id": "4e1ca12a332840eb",
+        "type": "fs-ops-access",
+        "z": "ece4d877ccbfed14",
+        "name": "Check for MD5 file exists",
+        "path": "",
+        "pathType": "str",
+        "filename": "filename",
+        "filenameType": "msg",
+        "read": true,
+        "write": false,
+        "throwerror": false,
+        "x": 1016.79736328125,
+        "y": 365.99107360839844,
+        "wires": [
+            [
+                "0bd127a9eb16d370",
+                "97c9553b9ce7a01d"
+            ],
+            [
+                "bc1dd4167c80ed1a",
+                "baac45062cb2369a"
+            ]
+        ]
+    },
+    {
+        "id": "d6e03a402b93e126",
+        "type": "fs-ops-link",
+        "z": "ece4d877ccbfed14",
+        "name": "Get Links",
+        "path": "firmware.directory",
+        "pathType": "flow",
+        "filename": "payload.files",
+        "filenameType": "msg",
+        "link": "payload.links",
+        "linkType": "msg",
+        "x": 783.9401779174805,
+        "y": 665.2261199951172,
+        "wires": [
+            [
+                "7f949435696b8db0"
+            ]
+        ]
+    },
+    {
+        "id": "9e8b26238d3bdb88",
+        "type": "fs-ops-dir",
+        "z": "ece4d877ccbfed14",
+        "name": "Firmware listing",
+        "path": "firmware.directory",
+        "pathType": "flow",
+        "filter": "*.bin",
+        "filterType": "str",
+        "dir": "payload.files",
+        "dirType": "msg",
+        "x": 500.4757843017578,
+        "y": 664.6944017410278,
+        "wires": [
+            [
+                "d6e03a402b93e126"
+            ]
+        ]
+    },
+    {
+        "id": "048ad7b474c0c96d",
+        "type": "md5",
+        "z": "ece4d877ccbfed14",
+        "name": "",
+        "fieldToHash": "payload",
+        "hashField": "payload",
+        "hashFieldType": "msg",
+        "x": 1039.1069946289062,
+        "y": 863.5594348907471,
+        "wires": [
+            [
+                "b7a59ca8b9cdebaf"
+            ]
+        ]
+    },
+    {
+        "id": "bea827dab83a7225",
+        "type": "config",
+        "z": "ece4d877ccbfed14",
+        "name": "Firmware Config",
+        "properties": [
+            {
+                "p": "firmware.directory",
+                "pt": "flow",
+                "to": "/home/ubuntu/OTA/",
+                "tot": "str"
+            }
+        ],
+        "active": true,
+        "x": 130.5115966796875,
+        "y": 377.0356616973877,
+        "wires": []
+    },
+    {
+        "id": "83b0c549608e802c",
+        "type": "httpInMultipart",
+        "z": "ece4d877ccbfed14",
+        "name": "OTA Upload",
+        "url": "/esp8266-ota",
+        "method": "post",
+        "fields": "[{ \"name\": \"firmware\"}]",
+        "swaggerDoc": "",
+        "x": 87.2259292602539,
+        "y": 829.3214197158813,
+        "wires": [
+            [
+                "f8b3112120837509"
+            ]
+        ]
+    },
+    {
+        "id": "60eeb945c9c172e9",
+        "type": "subflow",
+        "name": "Temperatura_Humedad",
+        "info": "Muestra la temperatura y humedad del sensor, además, permite modificar la intensidad de un led entre 0-100%",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "4fab405eb880d964",
+        "type": "mqtt in",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "topic": "infind/GRUPO5/datos",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "6e14c028e8273cfb",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "afa600b85b64065a",
+                "147869dc953cf2a5"
+            ]
+        ]
+    },
+    {
+        "id": "afa600b85b64065a",
+        "type": "json",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 120,
+        "wires": [
+            [
+                "5afa2475fd26e359",
+                "5b4a2126412d64af",
+                "e63767a0c8f82b0c"
+            ]
+        ]
+    },
+    {
+        "id": "5afa2475fd26e359",
+        "type": "debug",
+        "z": "60eeb945c9c172e9",
+        "name": "datos",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "23f28cac41064ef6",
+        "type": "mqtt out",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "topic": "infind/GRUPO5/led/cmd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e2f4de25537f3772",
+        "x": 1310,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4b7e5bd0a90dec2a",
+        "type": "debug",
+        "z": "60eeb945c9c172e9",
+        "name": "Nivel led",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "8d482ef617f37da7",
+        "type": "ui_slider",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "label": "Intensidad",
+        "tooltip": "",
+        "group": "d4be47820c64e5da",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "255",
+        "step": 1,
+        "className": "",
+        "x": 610,
+        "y": 260,
+        "wires": [
+            [
+                "a50477d2e5419ffc",
+                "0d60eb3cfba0e6de"
+            ]
+        ]
+    },
+    {
+        "id": "a50477d2e5419ffc",
+        "type": "change",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "parametro",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0d60eb3cfba0e6de",
+        "type": "function",
+        "z": "60eeb945c9c172e9",
+        "name": "genera datos gráfica Slider",
+        "func": "\nvar pwm=flow.get(\"parametro\");\n\nmsg.payload = {\n        \"level\":pwm,\n        };\n\nreturn msg;  ",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 380,
+        "wires": [
+            [
+                "23f28cac41064ef6",
+                "4b7e5bd0a90dec2a"
+            ]
+        ]
+    },
+    {
+        "id": "66fda89638167489",
+        "type": "inject",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 570,
+        "y": 380,
+        "wires": [
+            [
+                "0d60eb3cfba0e6de"
+            ]
+        ]
+    },
+    {
+        "id": "28a7245106d4506a",
+        "type": "mqtt in",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "topic": "infind/GRUPO5/conexion",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e2f4de25537f3772",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 200,
+        "y": 500,
+        "wires": [
+            [
+                "312d31fd2de7a679"
+            ]
+        ]
+    },
+    {
+        "id": "ae5ad2fd28f003fa",
+        "type": "debug",
+        "z": "60eeb945c9c172e9",
+        "name": "conexion",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "312d31fd2de7a679",
+        "type": "json",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 540,
+        "wires": [
+            [
+                "ae5ad2fd28f003fa",
+                "90a507be334d6949"
+            ]
+        ]
+    },
+    {
+        "id": "5b4a2126412d64af",
+        "type": "ui_gauge",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "group": "d4be47820c64e5da",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Intensidad del led",
+        "label": "units",
+        "format": "{{payload.LED}}",
+        "min": 0,
+        "max": "255",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 910,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "90a507be334d6949",
+        "type": "ui_text",
+        "z": "60eeb945c9c172e9",
+        "group": "d4be47820c64e5da",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Online",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 650,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "e63767a0c8f82b0c",
+        "type": "ui_text",
+        "z": "60eeb945c9c172e9",
+        "group": "d4be47820c64e5da",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Datos:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 870,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "147869dc953cf2a5",
+        "type": "change",
+        "z": "60eeb945c9c172e9",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.LED",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 160,
+        "wires": [
+            [
+                "8d482ef617f37da7"
+            ]
+        ]
+    },
+    {
+        "id": "6e14c028e8273cfb",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e2f4de25537f3772",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d4be47820c64e5da",
+        "type": "ui_group",
+        "name": "Intensidad PWM",
+        "tab": "2371e0c631309c09",
+        "order": 1,
+        "disp": true,
+        "width": "13",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2371e0c631309c09",
+        "type": "ui_tab",
+        "name": "Semana 6 y 7",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d062a9cb6f943d83",
+        "type": "tab",
+        "label": "SensorTemperatura",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "bdda9bad1e029459",
+        "type": "subflow:60eeb945c9c172e9",
+        "z": "d062a9cb6f943d83",
+        "name": "",
+        "x": 270,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "09cdbd47e5c12de0",
+        "type": "subflow:ece4d877ccbfed14",
+        "z": "d062a9cb6f943d83",
+        "name": "",
+        "x": 720,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1ecbc36a322869e7",
+        "type": "ui_spacer",
+        "z": "d062a9cb6f943d83",
+        "name": "spacer",
+        "group": "d4be47820c64e5da",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "31abde0d55f68434",
+        "type": "ui_spacer",
+        "z": "d062a9cb6f943d83",
+        "name": "spacer",
+        "group": "d4be47820c64e5da",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    }
+]
