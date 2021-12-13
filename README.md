@@ -24,12 +24,31 @@ El algoritmo que determinará las sugerencias ofrecidas al usuario se basará en
 - Arduino
 - Telegram
 - Youtube
-- 
+
 # Prerequesitos Hardware
+
+- 4 módulos ESP8266
+- Sensor de temperatura
+- Sensor de movimiento (detector de presencia)
+- Sensor táctil
+- Aire acondicionado 
+- Emisor de infrarrojos
+- Asistente virtual "Alexa"
+- Cinta de iluminación LED
 
 # Organización del proyecto
 
+Material necesario para hacer funcionar el proyecto:
+- Guía del usuario
+- ESP2866: Código arduino
+- NodeRed: Flujo
+
 # Autores
+
+- Luis Calderón Robustillo
+- Ruben González Navarro
+- Pedro Peña Puente
+- David Rodríguez Onieva
 
 # Licencia
 
