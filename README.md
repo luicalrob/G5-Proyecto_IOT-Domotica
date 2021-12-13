@@ -2,7 +2,7 @@
 Proyecto de asistencia en iluminación, temperatura y audio para un usuario en el hogar
 
 # Índice de contenidos
-  1. require 'Descripción del Proyecto'
+  1. [Descripción del proyecto]
   2. Prerequesitos Software
   3. Prerequesitos Hardware
   4. Organización del proyecto
