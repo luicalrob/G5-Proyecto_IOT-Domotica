@@ -1,0 +1,3 @@
+El codigo este se puede usar para el sensor de movimiento. Lo modificamos para que en vez de recibir la señal del botón
+reciba la señal del sensor y con está empieza a contar. Una vez pasado un tiempo si no ha habido movimiento no se reinicia
+el contador y por lo cual se saldría del bucle haciendo que se corte todo el sistema con una señal que pongamos.
