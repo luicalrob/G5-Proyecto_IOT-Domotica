@@ -9,7 +9,7 @@ Proyecto de asistencia en iluminación, temperatura y audio para un usuario en e
   5. [Autores](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#autores)
   6. [Licencia](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#licencia)
   7. [Galería](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#galer%C3%ADa)
-  8. [Referencias]()
+  8. [Referencias](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#galer%C3%ADa)
 
 # Descripción del Proyecto
 El proyecto consiste en el uso de 
@@ -26,3 +26,4 @@ El proyecto consiste en el uso de
 # Galería
 
 # Referencias
+[Acerca de ESP8266](https://www.prometec.net/modelos-esp8266/)
