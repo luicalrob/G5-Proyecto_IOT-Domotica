@@ -1,5 +1,6 @@
 # Proyecto_IOT-Domotica
-Proyecto de asistencia en iluminación, temperatura y música para un usuario en el hogar
+Proyecto de asistencia en iluminación, temperatura y música para un usuario en el hogar.
+
 [Seguimiento del proyecto en Trello](https://trello.com/invite/b/DzVk0QiH/1d70aea87e184c9797ed090d1163d35f/proyectoiot-domotica)
 
 # Índice de contenidos
