@@ -5,8 +5,8 @@ Proyecto de asistencia en iluminación, temperatura y música para un usuario en
 
 # Índice de contenidos
   1. [Descripción del proyecto](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#descripci%C3%B3n-del-proyecto)
-  2. [Prerequesitos Software](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#prerequesitos-software)
-  3. [Prerequesitos Hardware](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#prerequesitos-hardware)
+  2. [Prerequisitos Software](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#prerequesitos-software)
+  3. [Prerequisitos Hardware](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#prerequesitos-hardware)
   4. [Organización del proyecto](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#organizaci%C3%B3n-del-proyecto)
   5. [Autores](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#autores)
   6. [Licencia](https://github.com/luicalrob/G5-Proyecto_IOT-Domotica/blob/main/README.md#licencia)
@@ -19,7 +19,7 @@ La ESP8266 es un módulo para Arduino de bajo costo que permite la conexión Wi-
 
 El algoritmo que determinará las sugerencias ofrecidas al usuario se basará en gran medida en la meteorología del exterior. En especial con la medida de la luminosidad exterior que llega a la habitación. Adicionalmente, el proyecto contará con un sistema de activación mediante sensor táctil, y un sistema de renovación de la sesión mediante un sensor de movimiento. Es decir, el sistema permanecerá apagado hasta que el usuario interaccione con el sensor táctil. El sistema, una vez pasado un tiempo, se apagará suponiendo que nadie lo está usando. No obstante, una vez activado no será estrictamente necesario renovar la sensión mediante el sensor táctil, sino que el sistema contará con un sensor de movimiento que detectará el movimiento del usuario por la habitación.
 
-# Prerequesitos Software
+# Prerequisitos Software
 
 - NodeRed
 - MQTT Broker Mosquitto
@@ -27,7 +27,7 @@ El algoritmo que determinará las sugerencias ofrecidas al usuario se basará en
 - Telegram
 - Youtube
 
-# Prerequesitos Hardware
+# Prerequisitos Hardware
 
 - 4 módulos ESP8266
 - Sensor de temperatura
