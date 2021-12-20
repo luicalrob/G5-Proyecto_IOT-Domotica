@@ -17,8 +17,11 @@ extern "C" {
 // #include "SparkFunBME280.h"
 #include "DHTesp.h"
 
+// MAC placa LUIS: F6 CF A2 68 68 FC
+// MAC placa PEDRO: CA:2B:96:2F:46:AA
 // this is the MAC Address of the remote ESP server which receives these sensor readings
-uint8_t remoteMac[] = {0x36, 0x33, 0x33, 0x33, 0x33, 0x33};
+uint8_t remoteMac[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};
+//uint8_t remoteMac[] = {0x3E, 0x33, 0x33, 0x33, 0x33, 0x33};
 
 #define WIFI_CHANNEL 4
 #define SLEEP_SECS 15 * 60 // 15 minutes
@@ -35,6 +38,7 @@ DHTesp dht;
 
 volatile boolean callbackCalled;
 
+void gotoSleep() ;
 void setup() {
   Serial.begin(115200); 
   Serial.println();
@@ -68,7 +72,7 @@ void setup() {
 
   uint8_t bs[sizeof(sensorData)];
   memcpy(bs, &sensorData, sizeof(sensorData));
-  esp_now_send(NULL, bs, sizeof(sensorData)); // NULL means send to all peers
+  
 }
 
 void loop() {
@@ -79,13 +83,14 @@ void loop() {
     delay(dht.getMinimumSamplingPeriod());
     sensorData.humidity = dht.getHumidity();
     sensorData.temp = dht.getTemperature();
-    Serial.printf("temp=%01f, humidity=%01f, sensorData.temp, sensorData.humidity);
+    Serial.printf("temp=%01f, humidity=%01f", sensorData.temp, sensorData.humidity);
     Serial.print(dht.getStatusString());
     Serial.print("\t");
     Serial.print(sensorData.humidity, 1);
     Serial.print("\t\t");
     Serial.print(sensorData.temp, 1);
     Serial.print("\t\t");
+    esp_now_send(remoteMac, (uint8_t *)&sensorData, sizeof(sensorData)); // NULL means send to all peers
     //Serial.print(dht.toFahrenheit(temperature), 1);
     //Serial.print("\t\t");
     //Serial.print(dht.computeHeatIndex(temperature, humidity, false), 1);
