@@ -1,5 +1,5 @@
-const int LEDPin = 13;        // pin para el LED
-const int PIRPin = 2;         // pin de entrada (for PIR sensor)
+const int LEDPin = 16;        // pin para el LED
+const int PIRPin = 5;         // pin de entrada (for PIR sensor)
 
 int pirState = LOW;           // de inicio no hay movimiento
 int val = 0;                  // estado del pin
