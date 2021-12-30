@@ -1,5 +1,5 @@
 const int LEDPin= 16;
-const int PIRPin= 5;
+const int PIRPin= 14;
 
 void setup()
 {
