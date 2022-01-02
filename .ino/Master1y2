@@ -1,0 +1,32 @@
+//Código para leer la intensidad de la luz analógica:
+
+//Este código establece el pin A0 como entrada del fotoresitor
+//Encendemos el LED 16 cuando se toman medidas menores al 10% de luminosidad
+
+
+
+
+//Enciende led dependiendo de si supera un umbral de luminosidad:
+const int LEDPin = 16;
+const int LDRPin = A0;
+const int threshold = 100;
+
+void setup() {
+    Serial.begin(115200);  // set baud rate to 115200
+   pinMode(LEDPin, OUTPUT);
+   pinMode(LDRPin, INPUT);
+}
+
+void loop() {
+   int input = analogRead(LDRPin);
+  int brightness = map(input, 0, 1000, 0, 100);
+  Serial.println(brightness);
+  delay(10);
+  
+   if (input > threshold) {
+      digitalWrite(LEDPin, HIGH);
+   }
+   else {
+      digitalWrite(LEDPin, LOW);
+   }
+}
