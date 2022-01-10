@@ -2,70 +2,46 @@
 extern "C" {
   #include <espnow.h>
 }
+//SENSOR TACTIL//
+const int sensorPin = 5;
+bool Cont_detectado = false;
+//SENSOR PRESENCIA//
+const int LEDPin= 16;
+const int PIRPin= 14;
 
+//ESPNOW//
 // MAC placa LUIS: F6 CF A2 68 68 FC
 // MAC placa PEDRO: CA:2B:96:2F:46:AA
 // this is the MAC Address of the remote ESP server which receives these sensor readings
-uint8_t remoteMac[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};
-//uint8_t remoteMac[] = {0x3E, 0x33, 0x33, 0x33, 0x33, 0x33};
-
+uint8_t remoteMac[] = {0xCA, 0x2B, 0x96, 0x2F, 0x46, 0xAA};
 #define WIFI_CHANNEL 4
+volatile boolean callbackCalled;
+
+//SLEEP//
+void gotoSleep() ;
 #define SLEEP_SECS 15 * 60 // 15 minutes
 #define SEND_TIMEOUT 245  // 245 millis seconds timeout 
 
-// Tiempo para calibrarse el sensor de presencia (10-60 secs. según el datasheet)
-int calibrationTime = 30;
-
-//El momento en que el sensor emite un impulso bajo
-long unsigned int lowIn; 
-
-//Cantidad de milisegundos que el sensor tiene que ser baja 
-//antes de asumir que todo el movimiento se ha detenido
-long unsigned int pause = 5000; 
-
-boolean lockLow = true;
-boolean takeLowTime; 
-boolean envio = false;
-
-
 // keep in sync with slave struct
 struct __attribute__((packed)) SENSOR_DATA {
-    bool tactil;
+    bool tactil = false;
     bool presencia = false;
 } sensorData;
 
 
-const int PIRPin = 14;         // pin de entrada (for PIR sensor)
-const int ledPin = 16; // pin para el LED de aviso de actividad.
-int pirState = LOW;           // de inicio no hay movimiento
-int val = 0;                  // estado del pin
 
-
-volatile boolean callbackCalled;
-
-void gotoSleep() ;
 void setup() {
   Serial.begin(115200); 
+  //SENSOR TACTIL//
+  pinMode(sensorPin, INPUT);
+  //SENSOR PRESENCIA//
+  pinMode(LEDPin, OUTPUT);
+  pinMode(PIRPin, INPUT);
+  
   Serial.println();
   Serial.println("Status\tTactil \tPresencia");
   
-  // read sensor first before awake generates heat
-  // readBME280();
-  //dht.setup(5, DHTesp::DHT11); // Connect DHT sensor to GPIO 5
-  pinMode(PIRPin, INPUT);
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(PIRPin, LOW);
-  
-  //Dar al sensor algún tiempo para su calibrado
-  Serial.print("calibrando sensor ");
-  for(int i = 0; i < calibrationTime; i++){ 
-   Serial.print("."); 
-   delay(1000); 
-  } 
-  Serial.println(" echo"); 
-  Serial.println("SENSOR ACTIVO"); 
-  delay(50); 
-  
+  //ESPNOW
   WiFi.mode(WIFI_STA); // Station mode for esp-now sensor node
   WiFi.disconnect();
 
@@ -98,56 +74,50 @@ void loop() {
     gotoSleep();
   }
   else {
-    if(digitalRead(PIRPin) == HIGH){ 
-      envio=false;
-      digitalWrite(ledPin, HIGH); // El LED visualiza el estado de pin de salida del sensor 
-      if(lockLow){ // Se asegura que esperamos una transición a LOW antes de cualquier salida adicional: 
-        lockLow = false; 
 
-        envio=true;
-        Serial.println("---"); 
-        Serial.print("movimiento detectado "); 
-        Serial.print(millis()/1000); 
-        Serial.println(" sec"); 
-        delay(1); 
-      } 
-      takeLowTime = true; 
-    } 
-    if(digitalRead(PIRPin) == LOW){ 
-      envio=false;
-      digitalWrite(ledPin, LOW); // El LED visualiza el estado del sensor por pin de salida 
-      if(takeLowTime){ 
-        lowIn = millis(); // guarda el tiempo de la transición de HIGH a LOW 
-        takeLowTime = false; // asegurar que esto se hace solamente al inicio de una fase de baja 
-    } 
-    // Si el sensor es bajo por más de la pausa dada, 
-    // suponemos que hay más movimientos que van a suceder 
-    if(!lockLow && millis() - lowIn > pause){ 
-       // se cerciora este bloque de código sólo se ejecuta nuevamente después
-       // de que una nueva secuencia de movimiento se ha detectado
-       lockLow = true; 
-       Serial.print("motion ended at "); //output
-       Serial.print((millis() - pause)/1000);
-       Serial.println(" sec");
-       delay(1);
-    }
+  //SENSOR PRESENCIA//
+  int value= digitalRead(PIRPin);
+ 
+  if (value == HIGH)
+  {
+    sensorData.presencia = true;
+    digitalWrite(LEDPin, HIGH);
+    delay(50);
+    digitalWrite(LEDPin, LOW);
+    delay(50);
   }
-    //delay(dht.getMinimumSamplingPeriod()); //Poner otro delay
+  else
+  {
+    sensorData.presencia = false;
+    digitalWrite(LEDPin, LOW);
+  }
+
+//SENSOR TACTIL
+    int estado = digitalRead(sensorPin);
+
+   //mandar mensaje a puerto serie en función del valor leido
+   if (estado == HIGH)
+   {
     sensorData.tactil = true;
-    if(digitalRead(PIRPin)==HIGH){
-      sensorData.presencia = true;
-    }
-    else{
-      sensorData.presencia = false;
-    }
+      Serial.println("Contacto detectado");   
+      //aquí se ejecutarían las acciones
+      digitalWrite(13,HIGH);
+      delay(1000);
+   }
+   else{
+    sensorData.tactil=false;
+   }
+   
+   digitalWrite(13,LOW);
+   
     //Serial.printf("presencia=%01f, tactil=%01f", sensorData.presencia, sensorData.tactil);
     Serial.print(sensorData.presencia, 1);
     Serial.print("\t\t");
     Serial.print(sensorData.tactil, 1);
     Serial.print("\t\t");
-    if (envio){
+    //if (sensorData.tactil == true || sensorData.presencia == true){
       esp_now_send(remoteMac, (uint8_t *)&sensorData, sizeof(sensorData));
-    }
+    //}
   }
 }
 
