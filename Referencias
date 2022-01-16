@@ -2,3 +2,7 @@ Referencias tomadas en el proyecto:
 
 •	Cómo usar Alexa en nodered: 
 https://excontrol.es/2020/11/04/integracion-alexa-an-node-red/
+
+
+Libreria usada para enviar donde nos fijamos en los ejemplos:
+https://github.com/crankyoldgit/IRremoteESP8266
