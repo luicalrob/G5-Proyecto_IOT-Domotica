@@ -19,7 +19,7 @@ volatile boolean callbackCalled;
 
 //SLEEP//
 void gotoSleep() ;
-#define SLEEP_SECS 15 * 60 // 15 minutes
+#define SLEEP_SECS 0 //No podemos enviarlo a dormir          //15 * 60 // 15 minutes
 #define SEND_TIMEOUT 245  // 245 millis seconds timeout 
 
 // keep in sync with slave struct
@@ -70,10 +70,10 @@ void setup() {
 }
 
 void loop() {
-  if (callbackCalled || (millis() > SEND_TIMEOUT)) {
-    gotoSleep();
-  }
-  else {
+//  if (callbackCalled || (millis() > SEND_TIMEOUT)) {
+//    gotoSleep();
+//  }
+//  else {
 
   //SENSOR PRESENCIA//
   int value= digitalRead(PIRPin);
@@ -118,7 +118,7 @@ void loop() {
     //if (sensorData.tactil == true || sensorData.presencia == true){
       esp_now_send(remoteMac, (uint8_t *)&sensorData, sizeof(sensorData));
     //}
-  }
+  //}
 }
 
 void gotoSleep() {
