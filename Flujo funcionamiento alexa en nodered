@@ -1,0 +1,470 @@
+[
+    {
+        "id": "bcfd7dd75fb6702d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "65c0945664e1928c",
+        "type": "exec",
+        "z": "bcfd7dd75fb6702d",
+        "command": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e vol:0",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "c00d5de659d10ba2"
+            ],
+            [
+                "efcfeaf948d4decf"
+            ],
+            [
+                "a25356cde0f68657"
+            ]
+        ]
+    },
+    {
+        "id": "0ae05cb17fa72b19",
+        "type": "inject",
+        "z": "bcfd7dd75fb6702d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 120,
+        "wires": [
+            [
+                "65c0945664e1928c"
+            ]
+        ]
+    },
+    {
+        "id": "a25356cde0f68657",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "efcfeaf948d4decf",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c00d5de659d10ba2",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "290a32b6ec8e79e2",
+        "type": "comment",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Para poner a un nivel el volumen (0-10)",
+        "info": "",
+        "x": 400,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ae3c652c27e85dd5",
+        "type": "exec",
+        "z": "bcfd7dd75fb6702d",
+        "command": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e speak:\"Hola esto es una prueba\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 470,
+        "y": 300,
+        "wires": [
+            [
+                "e90c470349490607"
+            ],
+            [
+                "4334172e295cb6bc"
+            ],
+            [
+                "f15b78f6b33936a8"
+            ]
+        ]
+    },
+    {
+        "id": "42981cc2182ddd20",
+        "type": "inject",
+        "z": "bcfd7dd75fb6702d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 70,
+        "y": 300,
+        "wires": [
+            [
+                "ae3c652c27e85dd5"
+            ]
+        ]
+    },
+    {
+        "id": "f15b78f6b33936a8",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "4334172e295cb6bc",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e90c470349490607",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "474d9842afd096a6",
+        "type": "comment",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Para que alexa diga algo",
+        "info": "",
+        "x": 370,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "bd2665c9132103eb",
+        "type": "exec",
+        "z": "bcfd7dd75fb6702d",
+        "command": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"me voy\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 440,
+        "y": 540,
+        "wires": [
+            [
+                "47b65537884a924e"
+            ],
+            [
+                "64558e64968e107d"
+            ],
+            [
+                "aeff88d14fac88a4"
+            ]
+        ]
+    },
+    {
+        "id": "9ae294a7b6d5f9e0",
+        "type": "inject",
+        "z": "bcfd7dd75fb6702d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 70,
+        "y": 540,
+        "wires": [
+            [
+                "bd2665c9132103eb"
+            ]
+        ]
+    },
+    {
+        "id": "aeff88d14fac88a4",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "64558e64968e107d",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "47b65537884a924e",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "774dcc87690e1a97",
+        "type": "comment",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Para hacer que alexa ejecute un comando previamente creado",
+        "info": "",
+        "x": 430,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "b1267de25fe51a9d",
+        "type": "exec",
+        "z": "bcfd7dd75fb6702d",
+        "command": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e textcommand:\"Alexa volumen 0\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 470,
+        "y": 760,
+        "wires": [
+            [
+                "8de76172d1fed09a"
+            ],
+            [
+                "eed7c1072b44b8c1"
+            ],
+            [
+                "2714cc321ba66060"
+            ]
+        ]
+    },
+    {
+        "id": "55b2e3a6e3232b7f",
+        "type": "inject",
+        "z": "bcfd7dd75fb6702d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 760,
+        "wires": [
+            [
+                "b1267de25fe51a9d"
+            ]
+        ]
+    },
+    {
+        "id": "2714cc321ba66060",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "eed7c1072b44b8c1",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "8de76172d1fed09a",
+        "type": "debug",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "50bb2d810a20a5c6",
+        "type": "comment",
+        "z": "bcfd7dd75fb6702d",
+        "name": "Para simular un comando de voz: \"Alexa, ____\" Poniendo lo que queremos decir en donde estan las lineas",
+        "info": "",
+        "x": 420,
+        "y": 700,
+        "wires": []
+    }
+]
