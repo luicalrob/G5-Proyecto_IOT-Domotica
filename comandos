@@ -1,0 +1,589 @@
+[
+    {
+        "id": "44eb8a475a077d7f",
+        "type": "tab",
+        "label": "Alexa",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "61408bd35daaa534",
+        "type": "exec",
+        "z": "44eb8a475a077d7f",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "9eda330a9fe2c31f"
+            ],
+            [
+                "dc9509e57abc262a"
+            ],
+            [
+                "677849325ddbd96e"
+            ]
+        ]
+    },
+    {
+        "id": "4af72751238e82a9",
+        "type": "inject",
+        "z": "44eb8a475a077d7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e textcommand:\"Alexa pon musica alegre\"",
+        "payloadType": "str",
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "61408bd35daaa534"
+            ]
+        ]
+    },
+    {
+        "id": "677849325ddbd96e",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "dc9509e57abc262a",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9eda330a9fe2c31f",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "578986ba95f4ceb6",
+        "type": "comment",
+        "z": "44eb8a475a077d7f",
+        "name": "Pone una playlist con musica alegre",
+        "info": "",
+        "x": 340,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "30fe2fb83381513a",
+        "type": "exec",
+        "z": "44eb8a475a077d7f",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 330,
+        "y": 340,
+        "wires": [
+            [
+                "b84b6ac4e4f23af2"
+            ],
+            [
+                "432e5775e606d004"
+            ],
+            [
+                "b27c936a174332ac"
+            ]
+        ]
+    },
+    {
+        "id": "7f3278746c406616",
+        "type": "inject",
+        "z": "44eb8a475a077d7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e textcommand:\"Alexa pon musica triste\"",
+        "payloadType": "str",
+        "x": 190,
+        "y": 340,
+        "wires": [
+            [
+                "30fe2fb83381513a"
+            ]
+        ]
+    },
+    {
+        "id": "b27c936a174332ac",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "432e5775e606d004",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b84b6ac4e4f23af2",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "adef7ad2ca872640",
+        "type": "comment",
+        "z": "44eb8a475a077d7f",
+        "name": "Pone una playlist con musica triste",
+        "info": "",
+        "x": 340,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "700bea3abf31aa2b",
+        "type": "exec",
+        "z": "44eb8a475a077d7f",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 330,
+        "y": 500,
+        "wires": [
+            [
+                "ed899665dfdb78e7"
+            ],
+            [
+                "f8f3205ca546beb8"
+            ],
+            [
+                "47fc9df6e653b12d"
+            ]
+        ]
+    },
+    {
+        "id": "8ee1ced824fd2dea",
+        "type": "inject",
+        "z": "44eb8a475a077d7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e textcommand:\"Alexa pon musica instrumental\"",
+        "payloadType": "str",
+        "x": 190,
+        "y": 500,
+        "wires": [
+            [
+                "700bea3abf31aa2b"
+            ]
+        ]
+    },
+    {
+        "id": "47fc9df6e653b12d",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f8f3205ca546beb8",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ed899665dfdb78e7",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "09479ed6a367e256",
+        "type": "comment",
+        "z": "44eb8a475a077d7f",
+        "name": "Pone una playlist con musica instrumental",
+        "info": "",
+        "x": 360,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "831f9db432309fd6",
+        "type": "exec",
+        "z": "44eb8a475a077d7f",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 310,
+        "y": 680,
+        "wires": [
+            [
+                "1752e7ab53b31318"
+            ],
+            [
+                "4bf5af5043726169"
+            ],
+            [
+                "a64fdff369b69385"
+            ]
+        ]
+    },
+    {
+        "id": "cee6ea6921d0d8e6",
+        "type": "inject",
+        "z": "44eb8a475a077d7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e textcommand:\"Alexa enciende la luz del dormitorio y pon luz blanca\"",
+        "payloadType": "str",
+        "x": 170,
+        "y": 680,
+        "wires": [
+            [
+                "831f9db432309fd6"
+            ]
+        ]
+    },
+    {
+        "id": "a64fdff369b69385",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "4bf5af5043726169",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "1752e7ab53b31318",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a8ea0beab5ef42f1",
+        "type": "comment",
+        "z": "44eb8a475a077d7f",
+        "name": "Enciende las luces y las pone blancas",
+        "info": "",
+        "x": 330,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "ca59162df5a599f6",
+        "type": "exec",
+        "z": "44eb8a475a077d7f",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 310,
+        "y": 860,
+        "wires": [
+            [
+                "759d5b4f703b33bf"
+            ],
+            [
+                "9bac47a5aa017f13"
+            ],
+            [
+                "e53ad358216893d9"
+            ]
+        ]
+    },
+    {
+        "id": "da50efc50f930aef",
+        "type": "inject",
+        "z": "44eb8a475a077d7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e textcommand:\"Alexa enciende la luz del dormitorio y pon luz blanca\"",
+        "payloadType": "str",
+        "x": 170,
+        "y": 860,
+        "wires": [
+            [
+                "ca59162df5a599f6"
+            ]
+        ]
+    },
+    {
+        "id": "e53ad358216893d9",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "9bac47a5aa017f13",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "759d5b4f703b33bf",
+        "type": "debug",
+        "z": "44eb8a475a077d7f",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "1fb4a2f2f682f744",
+        "type": "comment",
+        "z": "44eb8a475a077d7f",
+        "name": "Enciende las luces y las pone azules",
+        "info": "",
+        "x": 320,
+        "y": 800,
+        "wires": []
+    }
+]
