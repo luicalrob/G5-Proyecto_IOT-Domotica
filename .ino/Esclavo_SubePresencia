@@ -21,6 +21,9 @@ extern "C" {
 #define COMMANDTOPIC "ESPNow/command"
 #define SERVICETOPIC "ESPNow/service"
 
+#define Topic_Tiempo "Infind/ESPNOW/Meteorologia"
+#define Topic_Estado "Infind/ESPNOW/Estado"
+
 /* Set a private Mac Address
  *  http://serverfault.com/questions/40712/what-range-of-mac-addresses-can-i-safely-use-for-my-virtual-machines
  * Note: the point of setting a specific MAC is so you can replace this Gateway ESP8266 device with a new one
@@ -29,13 +32,19 @@ extern "C" {
  //48:3F:DA:0C:BA:34
  //CA:2B:96:2F:46:AA Mac de Pedro
  //F6:CF:A2:68:68:FC MAC de Luis
-uint8_t mac[] = {0xCA, 0xCF, 0x96, 0x2F, 0x46, 0xAA};// your MAC
+ uint8_t mac1[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};// MAC de Master 1
+ uint8_t mac2[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};// MAC de MAster 2
+ uint8_t mac3[] = {0xCA, 0x2B, 0x96, 0x2F, 0x46, 0xAA};// MAC de Master 3
+ 
+uint8_t mac[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};// your MAC
 void initVariant() {
   //wifi_set_macaddr(SOFTAP_IF, &mac[0]);
 }
-char *ssid      = "infind";               // Set you WiFi SSID
-char *password  = "1518wifi";               // Set you WiFi password
+//char *ssid      = "infind";               // Set you WiFi SSID
+//char *password  = "1518wifi";               // Set you WiFi password
 
+char *ssid      = "MiFibra-1738";               // Set you WiFi SSID
+char *password  = "zn6TAwZx";
 
 IPAddress server(192, 168, 1, 36);//your MQTT Broker address
 
@@ -50,13 +59,26 @@ String deviceMac;
 struct __attribute__((packed)) SENSOR_DATA {
   bool tactil;
   bool presencia;
-} sensorData;
+} sensorData_Est;
 
-struct mensaje {
+struct mensaje1 {
   bool tactil;
   bool presencia;
   bool ok;
 };
+
+struct __attribute__((packed)) SENSOR_DATA_Temp {
+    float temp;
+    float humidity;
+    float lum;
+} sensorData_Temp;
+
+struct mensaje2 {
+  float temp;
+    float humidity;
+    float lum;
+};
+int tipo=0; //tipo de dato que le llega, al principio no es ninguno de los dos(1 o 2);
 
 volatile boolean haveReading = false;
 
@@ -95,24 +117,44 @@ void loop() {
 
   if (haveReading) {
     haveReading = false;
-    wifiConnect();
-    reconnectMQTT();
-    sendToBroker();
+    if (WiFi.status() != WL_CONNECTED)
+      {
+        wifiConnect();
+      }
+    if (!client.connected()) 
+      {
+        reconnectMQTT();
+      }
+    sendToBroker(); 
+    
     client.disconnect();
-    delay(200);
+    //delay(200);
     ESP.restart(); // <----- Reboots to re-enable ESP-NOW
   }
 }
 
 void sendToBroker() {
-
-  Serial.println(sensorData.tactil);
-  String payload = "{";
-  payload += "\"tactil\":\"" + String(sensorData.tactil);
-  payload += "\",\"presencia\":\""+String(sensorData.presencia);
-  payload += "\"}";
-  Serial.println(payload);
-  publishMQTT(SENDTOPIC,payload);
+  if(tipo==1)
+  {
+    //Serial.println(sensorData_Est.tactil);
+    String payload = "{";
+    payload += "\"tactil\":\"" + String(sensorData_Est.tactil);
+    payload += "\",\"presencia\":\""+String(sensorData_Est.presencia);
+    payload += "\"}";
+    Serial.println(payload);
+    publishMQTT(Topic_Estado,payload);
+  }
+  if(tipo==2)
+  {
+    //Serial.println(sensorData_Est.tactil);
+    String payload = "{";
+    payload += "\"Temperatura\":\"" + String(sensorData_Temp.temp);
+    payload += "\",\"Humedad\":\""+String(sensorData_Temp.humidity);
+    payload += "\",\"Luminosidad\":\""+String(sensorData_Temp.lum);
+    payload += "\"}";
+    Serial.println(payload);
+    publishMQTT(Topic_Tiempo,payload);
+  }
 }
 
 void initEspNow() {
@@ -133,21 +175,38 @@ void initEspNow() {
     deviceMac += String(mac[3], HEX);
     deviceMac += String(mac[4], HEX);
     deviceMac += String(mac[5], HEX);
-    
-    memcpy(&sensorData, data, sizeof(sensorData));
-      struct mensaje mi_mensaje;
-    memcpy(&mi_mensaje, data, sizeof(mi_mensaje));
-    
-    Serial.print("Message received from device: "); 
-    Serial.println(deviceMac);
-    //Serial.printf(" Tactil=%0.2f, Hum=%0.0f%%", sensorData.tactil, sensorData.presencia); 
-    Serial.print("\nBytes recibidos:");   
-    Serial.println(len); 
-    Serial.print("Tactil:");   
-    Serial.println(mi_mensaje.tactil); 
-    Serial.print("Presencia:");   
-    Serial.println(mi_mensaje.presencia); 
-
+     
+    if(mac==mac3)
+    {
+      tipo=1;
+      memcpy(&sensorData_Est, data, sizeof(sensorData_Est));
+        struct mensaje1 mi_mensaje1;
+      memcpy(&mi_mensaje1, data, sizeof(mi_mensaje1));
+      
+      Serial.print("Message received from device: "); 
+      Serial.println(deviceMac);
+      //Serial.printf(" Tactil=%0.2f, Hum=%0.0f%%", sensorData.tactil, sensorData.presencia); 
+      Serial.print("\nBytes recibidos:");   
+      Serial.println(len); 
+      Serial.print("Tactil:");   
+      Serial.println(mi_mensaje1.tactil); 
+      Serial.print("Presencia:");   
+      Serial.println(mi_mensaje1.presencia); 
+    }
+    if(mac==mac1 || mac==mac2)
+    {
+      tipo=2;
+      memcpy(&sensorData_Temp, data, sizeof(sensorData_Temp));
+      struct mensaje2 mi_mensaje2;
+      memcpy(&mi_mensaje2, data, sizeof(mi_mensaje2));
+      
+      Serial.print("Message received from device: "); 
+      Serial.println(deviceMac);
+      //Serial.printf(" Tactil=%0.2f, Hum=%0.0f%%", sensorData.tactil, sensorData.presencia); 
+      Serial.print("\nBytes recibidos:");   
+      Serial.println(len); 
+      Serial.printf(" Temperatura=%0.2f, Humedad=%0.0f%%, Luminosidad=%0.2f%%", sensorData_Temp.temp, sensorData_Temp.humidity, sensorData_Temp.lum); 
+    }
     haveReading = true;
   });
 }
@@ -169,7 +228,14 @@ void publishMQTT(String topic, String message) {
   if (!client.connected()) {
     reconnectMQTT();
   }
-  client.publish(SENDTOPIC, message.c_str());
+  if(tipo==1)
+  {
+  client.publish(Topic_Estado, message.c_str());
+  }
+  if(tipo==2)
+  {
+    client.publish(Topic_Tiempo, message.c_str());
+  }
 }
 
 void reconnectMQTT() {
