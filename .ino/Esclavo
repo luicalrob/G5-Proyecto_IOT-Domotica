@@ -15,6 +15,95 @@ extern "C" {
   #include <espnow.h>
 }
 
+//FOTA//
+// NO OLVIDAR ESCRIBIR LOS COMANDOS EN LA MAQUINA VIRTUAL //
+/*Creamos una carpeta donde se guardan los archivos:
+   cd OTA
+   ls -l
+   pwd
+ * */
+#include <ESP8266httpUpdate.h>
+
+// datos para actualización   >>>> SUSTITUIR IP <<<<<
+#define HTTP_OTA_ADDRESS      F("192.168.1.147")         // Address of OTA update server
+#define HTTP_OTA_PATH         F("/esp8266-ota/update") // Path to update firmware
+#define HTTP_OTA_PORT         1880                     // Port of update server
+                                                       // Name of firmware
+                                                        // Name of firmware
+#define HTTP_OTA_VERSION      String(__FILE__).substring(String(__FILE__).lastIndexOf('\\')+1) + ".nodemcu" 
+//
+const char* ssid = "MiFibra-1738";
+const char* password = "zn6TAwZx";
+//
+//const char* ssid = "Araceli";
+//const char* password = "chinitonto";
+
+// GPIOs
+int LED_blink = 2;
+int LED_OTA = 16;
+// funciones para progreso de OTA
+void progreso_OTA(int, int);
+void final_OTA();
+void inicio_OTA();
+void error_OTA(int);
+
+//-----------------------------------------------------
+void intenta_OTA()
+{ 
+  Serial.println( "------------------------------" );  
+  Serial.println( "Comprobando actualización:" );
+  Serial.print(HTTP_OTA_ADDRESS);Serial.print(":");Serial.print(HTTP_OTA_PORT);Serial.println(HTTP_OTA_PATH);
+  Serial.println( "--------------------------" );  
+  ESPhttpUpdate.setLedPin(LED_blink, LOW);
+  ESPhttpUpdate.onStart(inicio_OTA);
+  ESPhttpUpdate.onError(error_OTA);
+  ESPhttpUpdate.onProgress(progreso_OTA);
+  ESPhttpUpdate.onEnd(final_OTA);
+  WiFiClient wClient;
+  switch(ESPhttpUpdate.update(wClient, HTTP_OTA_ADDRESS, HTTP_OTA_PORT, HTTP_OTA_PATH, HTTP_OTA_VERSION)) {
+    case HTTP_UPDATE_FAILED:
+      Serial.printf(" HTTP update failed: Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
+      break;
+    case HTTP_UPDATE_NO_UPDATES:
+      Serial.println(F(" El dispositivo ya está actualizado"));
+      break;
+    case HTTP_UPDATE_OK:
+      Serial.println(F(" OK"));
+      break;
+    }
+}
+
+//-----------------------------------------------------
+void final_OTA()
+{
+  Serial.println("Fin OTA. Reiniciando...");
+}
+
+void inicio_OTA()
+{
+  Serial.println("Nuevo Firmware encontrado. Actualizando...");
+}
+
+void error_OTA(int e)
+{
+  char cadena[64];
+  snprintf(cadena,64,"ERROR: %d",e);
+  Serial.println(cadena);
+}
+
+void progreso_OTA(int x, int todo)
+{
+  char cadena[256];
+  int progress=(int)((x*100)/todo);
+  if(progress%10==0)
+  {
+    snprintf(cadena,256,"Progreso: %d%% - %dK de %dK",progress,x/1024,todo/1024);
+    Serial.println(cadena);
+  }
+}
+
+
+
 
 //-------- Customise the above values --------
 #define SENDTOPIC "infind/ESPNow/key"
@@ -43,8 +132,6 @@ void initVariant() {
 //char *ssid      = "infind";               // Set you WiFi SSID
 //char *password  = "1518wifi";               // Set you WiFi password
 
-char *ssid      = "MiFibra-1738";               // Set you WiFi SSID
-char *password  = "zn6TAwZx";
 
 IPAddress server(192, 168, 1, 36);//your MQTT Broker address
 
@@ -94,7 +181,15 @@ int heartBeat;
 
 
 void setup() {
-  Serial.begin(115200); 
+  Serial.begin(115200);
+
+  //FOTA//
+  pinMode(LED_blink, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
+  pinMode(LED_OTA, OUTPUT); 
+  digitalWrite(LED_blink, LOW);   // LED on
+  wifiConnect();
+  intenta_OTA();
+  
   Serial.println();
   Serial.println();
   Serial.println("ESP_Now Controller");
