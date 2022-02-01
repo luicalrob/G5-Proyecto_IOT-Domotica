@@ -1,1 +1,1808 @@
-
+[
+    {
+        "id": "d209909e0e46f2d8",
+        "type": "tab",
+        "label": "Trabajo_Final_2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "515fc0c1c3cbc5aa",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "d30a20f3105f3a06",
+        "type": "mqtt in",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "topic": "infind/ESPNow/+",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "23e23252c67e0cc3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "515fc0c1c3cbc5aa"
+            ]
+        ]
+    },
+    {
+        "id": "a19771552be40497",
+        "type": "mqtt in",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "topic": "infind/ESPNOW/Estado",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "23e23252c67e0cc3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 120,
+        "y": 340,
+        "wires": [
+            [
+                "61f84ba96a25015a"
+            ]
+        ]
+    },
+    {
+        "id": "61f84ba96a25015a",
+        "type": "json",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 340,
+        "wires": [
+            [
+                "c6027c60e115c1bc",
+                "8ab66b5e41738c47",
+                "924393e493d3d291",
+                "ad6a4d9d98583fc4"
+            ]
+        ]
+    },
+    {
+        "id": "c6027c60e115c1bc",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "Sensor tactil",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.tactil",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Sensor tactil",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "0724bde195f3f7e6",
+                "2fd35b666fe18da4"
+            ]
+        ]
+    },
+    {
+        "id": "8ab66b5e41738c47",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "Sensor presencia",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.presencia",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Sensor presencia",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 380,
+        "wires": [
+            [
+                "26660857bbf70aef"
+            ]
+        ]
+    },
+    {
+        "id": "924393e493d3d291",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5ea0cb84bb10f897",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "Temperatura",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperatura",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Temperatura",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "temperatura",
+                "pt": "flow",
+                "to": "payload.temperatura",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 740,
+        "wires": [
+            [
+                "0b29990b16ab04c7"
+            ]
+        ]
+    },
+    {
+        "id": "4343edd9ab74bbcf",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "Humedad",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humedad",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Humedad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "humedad",
+                "pt": "flow",
+                "to": "payload.humedad",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 780,
+        "wires": [
+            [
+                "0b29990b16ab04c7"
+            ]
+        ]
+    },
+    {
+        "id": "de916dcf7e8cd2a7",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "Luminosidad",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.luminosidad",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Luminosidad",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "luminosidad",
+                "pt": "flow",
+                "to": "payload.luminosidad",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 820,
+        "wires": [
+            [
+                "0b29990b16ab04c7"
+            ]
+        ]
+    },
+    {
+        "id": "ef196c6ac6b87d44",
+        "type": "telegram sender",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "bot": "f0a162a1c048ea61",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 930,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e13946f8791c328b",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "mensaje bienvenida",
+        "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola \"+msg.originalMessage.from.first_name+\", la temperatura actualmente es de \"+flow.get(\"temperatura\")+\"º y la humedad es de \"+flow.get(\"humedad\")+\". Con estos valores te recomendamos musica \"+flow.get(\"tipo_musica\")+\", con un color de luces \"+flow.get(\"tipo_leds\")+\"\\nSi esta de acuerdo escriba el comando /continua \\nSi prefiere otro tipo de escena escriba uno de los siguientes comandos: \\n/triste \\n/alegre \\n/chill (musica tranquila) \\n/bailar\";\n return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 519.7925872802734,
+        "y": 1045.1477127075195,
+        "wires": [
+            [
+                "ef196c6ac6b87d44"
+            ]
+        ]
+    },
+    {
+        "id": "cc3ec0bed2a01c03",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "57ab8724ee488f79",
+        "type": "telegram receiver",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "bot": "f0a162a1c048ea61",
+        "saveDataDir": "",
+        "filterCommands": true,
+        "x": 130,
+        "y": 980,
+        "wires": [
+            [
+                "cc3ec0bed2a01c03",
+                "e13946f8791c328b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6770118b17eade9e",
+        "type": "telegram command",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "command": "/start",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "f0a162a1c048ea61",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 90,
+        "y": 1060,
+        "wires": [
+            [
+                "e13946f8791c328b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "70d211971d5116b4",
+        "type": "telegram command",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "command": "/consulta",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "f0a162a1c048ea61",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 100,
+        "y": 1140,
+        "wires": [
+            [
+                "fbc9332d88893264"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fbc9332d88893264",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "ultimo registro",
+        "func": "msg.mensaje=msg.payload;\nmsg.limit=1;\nmsg.sort={\"date\":-1};\nmsg.payload={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1140,
+        "wires": [
+            [
+                "8cb34b07396d7bd4"
+            ]
+        ]
+    },
+    {
+        "id": "8cb34b07396d7bd4",
+        "type": "mongodb in",
+        "z": "d209909e0e46f2d8",
+        "mongodb": "f605fa69.8f5008",
+        "name": "",
+        "collection": "datos_json",
+        "operation": "find",
+        "x": 570,
+        "y": 1140,
+        "wires": [
+            [
+                "48d935a7c03241fc"
+            ]
+        ]
+    },
+    {
+        "id": "48d935a7c03241fc",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "mensaje respuesta",
+        "func": "var temp=msg.payload[0].BME280.Temperatura;\nvar fecha=msg.payload[0].date;\n\nmsg.payload=msg.mensaje;\n\nmsg.payload.content=\"La temperatura es de \"+temp+\"ºC\\n\";\nmsg.payload.content+=\"Última actualización: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 1140,
+        "wires": [
+            [
+                "074591db4aa97549",
+                "ef196c6ac6b87d44"
+            ]
+        ]
+    },
+    {
+        "id": "074591db4aa97549",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "7c2fb93c487b928d",
+        "type": "mqtt in",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "topic": "infind/ESPNOW/Metereologia",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "23e23252c67e0cc3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 160,
+        "y": 740,
+        "wires": [
+            [
+                "3aa038b7bd5ab8f0"
+            ]
+        ]
+    },
+    {
+        "id": "3aa038b7bd5ab8f0",
+        "type": "json",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 740,
+        "wires": [
+            [
+                "5ea0cb84bb10f897",
+                "4343edd9ab74bbcf",
+                "de916dcf7e8cd2a7",
+                "4d7e71febc8550d5"
+            ]
+        ]
+    },
+    {
+        "id": "79948649b477077e",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "Tipo de sesion",
+        "func": "var temp=msg.payload.temp_media;\nvar lum=msg.payload.lum_media;\nif (temp < 20 && lum < 20){\n    flow.set(\"tipo_musica\", \"triste\");\n}else if (temp < 23 && lum > 70){\n    flow.set(\"tipo_musica\", \"alegre\");\n} else{\n    flow.set(\"tipo_musica\", \"chill\");\n}\n//flow.set([\"tipo_musica\", \"tipo_leds\"], []); //flow.set([\"count\", \"colour\", \"temperature\"], [123, \"red\", \"12.5\"]); \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1680,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "05f1ecba3263c0b8",
+        "type": "telegram command",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "command": "/continua",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "f0a162a1c048ea61",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 120,
+        "y": 1320,
+        "wires": [
+            [
+                "0583824da1629714"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0583824da1629714",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "func": "var comando = flow.get(\"comando_musica\");\nvar estilo = flow.get(\"tipo_musica\");\n\nmsg.payload = comando + estilo\n//msg.payload = comando + \"pon musica \" + estilo + \" en amazon music\"\n//        \"luz\":flow.get(\"tipo_leds\")\nreturn msg;\n\n\n\n//msg.payload = comando +\"hola\";\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1320,
+        "wires": [
+            [
+                "ecc10882a46fdbb6",
+                "d493839439c2ec91"
+            ]
+        ]
+    },
+    {
+        "id": "f9db14ddf5aaa23a",
+        "type": "mongodb out",
+        "z": "d209909e0e46f2d8",
+        "mongodb": "f605fa69.8f5008",
+        "name": "",
+        "collection": "datos_json",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 850,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "4d7e71febc8550d5",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "+ fecha",
+        "func": "msg.payload.date = new Date();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 700,
+        "wires": [
+            [
+                "f9db14ddf5aaa23a"
+            ]
+        ]
+    },
+    {
+        "id": "0b29990b16ab04c7",
+        "type": "ui_chart",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "group": "d1853d609aa0e0a0",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 910,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f57ea4348e3b738",
+        "type": "mongodb in",
+        "z": "d209909e0e46f2d8",
+        "mongodb": "f605fa69.8f5008",
+        "name": "",
+        "collection": "datos_json",
+        "operation": "find",
+        "x": 1210,
+        "y": 160,
+        "wires": [
+            [
+                "8285fa4ad3fd6945"
+            ]
+        ]
+    },
+    {
+        "id": "3260dbd373115866",
+        "type": "inject",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{ }",
+        "payloadType": "json",
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "0724bde195f3f7e6"
+            ]
+        ]
+    },
+    {
+        "id": "0724bde195f3f7e6",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "Seleccionar 10 últimos valores",
+        "func": "msg.payload = {};\nmsg.limit = 10;\nmsg.sort = {\"date\" : -1};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 160,
+        "wires": [
+            [
+                "0f57ea4348e3b738"
+            ]
+        ]
+    },
+    {
+        "id": "8285fa4ad3fd6945",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "Calcular medias",
+        "func": "var tempmedia=0;\nvar lummedia=0;\n\nfor (var i = 0; i < msg.payload.length; i++) { \n    tempmedia=tempmedia+msg.payload[i].temperatura;\n    lummedia=lummedia+msg.payload[i].luminosidad;\n}\n\ntempmedia=tempmedia/msg.payload.length;\nlummedia=lummedia/msg.payload.length;\n    \nmsg.payload.temp_media=tempmedia;\nmsg.payload.lum_media=lummedia;\n\nreturn msg;  ",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1480,
+        "y": 160,
+        "wires": [
+            [
+                "79948649b477077e"
+            ]
+        ]
+    },
+    {
+        "id": "7a0926c76df606fb",
+        "type": "telegram command",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "command": "/triste",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "b0be032ffabbbbfe",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 1500,
+        "wires": [
+            [
+                "3b9fdb733b8cdb4e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b0d7a952ecb59e23",
+        "type": "exec",
+        "z": "d209909e0e46f2d8",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 630,
+        "y": 1700,
+        "wires": [
+            [
+                "ce4f4b5a0da4425f"
+            ],
+            [
+                "b5fe31330714e66f"
+            ],
+            [
+                "6836d0a1171c8319"
+            ]
+        ]
+    },
+    {
+        "id": "3b9fdb733b8cdb4e",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"triste\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1520,
+        "wires": [
+            [
+                "b0d7a952ecb59e23"
+            ]
+        ]
+    },
+    {
+        "id": "6836d0a1171c8319",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "b5fe31330714e66f",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "ce4f4b5a0da4425f",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "12b7c4fbd4a98161",
+        "type": "telegram command",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "command": "/alegre",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "b0be032ffabbbbfe",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 1620,
+        "wires": [
+            [
+                "8e4ecbc5a601d410"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2523ad2225a1e36e",
+        "type": "telegram command",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "command": "/chill",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "b0be032ffabbbbfe",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 1740,
+        "wires": [
+            [
+                "1c6c2e6b9364ba8d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0b0e50f2929b11c5",
+        "type": "telegram command",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "command": "/bailar",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "b0be032ffabbbbfe",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 1860,
+        "wires": [
+            [
+                "e6b89ea99c9481d8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8e4ecbc5a601d410",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"alegre\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1640,
+        "wires": [
+            [
+                "b0d7a952ecb59e23"
+            ]
+        ]
+    },
+    {
+        "id": "1c6c2e6b9364ba8d",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"chill\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1760,
+        "wires": [
+            [
+                "b0d7a952ecb59e23"
+            ]
+        ]
+    },
+    {
+        "id": "e6b89ea99c9481d8",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"bailar\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1880,
+        "wires": [
+            [
+                "b0d7a952ecb59e23"
+            ]
+        ]
+    },
+    {
+        "id": "efe5906afa2c87dd",
+        "type": "inject",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1560,
+        "wires": [
+            [
+                "3b9fdb733b8cdb4e"
+            ]
+        ]
+    },
+    {
+        "id": "98c9f16c63c15c42",
+        "type": "inject",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1680,
+        "wires": [
+            [
+                "8e4ecbc5a601d410"
+            ]
+        ]
+    },
+    {
+        "id": "d539deab542609f8",
+        "type": "inject",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1800,
+        "wires": [
+            [
+                "1c6c2e6b9364ba8d"
+            ]
+        ]
+    },
+    {
+        "id": "77682b16a300e0dc",
+        "type": "inject",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1920,
+        "wires": [
+            [
+                "e6b89ea99c9481d8"
+            ]
+        ]
+    },
+    {
+        "id": "f5f1c0de78a6c84d",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Para reproducir las rutinas según el estado indicado en telegram",
+        "info": "",
+        "x": 490,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "2fd35b666fe18da4",
+        "type": "switch",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 750,
+        "y": 280,
+        "wires": [
+            [
+                "40c610efa65ad4c9"
+            ]
+        ]
+    },
+    {
+        "id": "26660857bbf70aef",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "function",
+        "func": "if(flow.get(\"Sistema_activo\")==1)\n{\n    //msg.payload={\"Sensor\":msg.payload};\n    msg.limit = 1;\n    msg.sort={\"date\":-1};\n        \n    flow.set(\"buscar\",0);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 380,
+        "wires": [
+            [
+                "e41fa096801b7520"
+            ]
+        ]
+    },
+    {
+        "id": "40c610efa65ad4c9",
+        "type": "change",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Sistema_activo",
+                "pt": "flow",
+                "to": "1",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "comando_rutina",
+                "pt": "flow",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "comando_orden",
+                "pt": "flow",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e textcommand:",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "comando_hablar",
+                "pt": "flow",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e speak:",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "comando_musica",
+                "pt": "flow",
+                "to": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e playmusic:\"AMAZON_MUSIC\":",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "ultima_fecha",
+                "pt": "flow",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 280,
+        "wires": [
+            [
+                "282297b67ad8fb98"
+            ]
+        ]
+    },
+    {
+        "id": "e41fa096801b7520",
+        "type": "mongodb in",
+        "z": "d209909e0e46f2d8",
+        "mongodb": "f605fa69.8f5008",
+        "name": "",
+        "collection": "datos_json",
+        "operation": "find",
+        "x": 970,
+        "y": 380,
+        "wires": [
+            [
+                "0d6f562d5e816477"
+            ]
+        ]
+    },
+    {
+        "id": "0d6f562d5e816477",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "func": "var presencia=msg.payload[0].presencia;\nvar fecha=msg.payload[0].date;\n\n\nvar ultima_fecha = flow.get(\"ultima_fecha\");\nvar ahora = new Date();\nvar fecha_actual = ahora.getTime();\n//El valor devuelto por el metodo getTime() es el número \n//de milisegundos desde el 1 de enero de 1970 00:00:00 UTC.\n\nif(presencia==1) \n{\n    \n    flow.set(\"ultima_fecha\",ahora.getTime());\n}\nelse    // ninguno esta activo, trabajamos con el tiempo\n{\n    if((fecha_actual-ultima_fecha)>240000)\n    //5 minutos x 60 segundos x 10 = 3000 milisegundos\n    {\n       flow.set(\"Sistema_activo\",0); \n    }\n}\n\n\n//PROGRAMA DE DAVID\n\n//var presencia0=msg.payload[0].presencia;\n//var presencia1=msg.payload[1].presencia;\n\n\n//if (presencia0 == false) and (presencia1==false)\n//{\n//    Sistema_activo=0;\n//}\nmsg.sistema=flow.get(\"Sistema_activo\");\nmsg.fecha_actual=fecha_actual;\nmsg.ultima_fecha=ultima_fecha;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 380,
+        "wires": [
+            [
+                "083252885218cfe0"
+            ]
+        ]
+    },
+    {
+        "id": "083252885218cfe0",
+        "type": "switch",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "property": "Sistema_activo",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1350,
+        "y": 380,
+        "wires": [
+            [
+                "b22b5e9cda289332"
+            ]
+        ]
+    },
+    {
+        "id": "b22b5e9cda289332",
+        "type": "exec",
+        "z": "d209909e0e46f2d8",
+        "command": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"Nadie\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Finalizar_sesion",
+        "x": 1520,
+        "y": 380,
+        "wires": [
+            [
+                "93b6606f050f8ddd"
+            ],
+            [
+                "82006cc60247bdc4"
+            ],
+            [
+                "20b7dcea99917928"
+            ]
+        ]
+    },
+    {
+        "id": "20b7dcea99917928",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "82006cc60247bdc4",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "93b6606f050f8ddd",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "282297b67ad8fb98",
+        "type": "exec",
+        "z": "d209909e0e46f2d8",
+        "command": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"Encender\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Inicio_sesion",
+        "x": 1190,
+        "y": 280,
+        "wires": [
+            [
+                "54d36a449d17f401"
+            ],
+            [
+                "413a97f7aec68cf4"
+            ],
+            [
+                "f179526b4561a78a"
+            ]
+        ]
+    },
+    {
+        "id": "f179526b4561a78a",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "413a97f7aec68cf4",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "54d36a449d17f401",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ecc10882a46fdbb6",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "d493839439c2ec91",
+        "type": "exec",
+        "z": "d209909e0e46f2d8",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 510,
+        "y": 1320,
+        "wires": [
+            [
+                "40d4de28acebf38d"
+            ],
+            [
+                "1fbd72642e12a377"
+            ],
+            [
+                "7515dbe474f16dcd"
+            ]
+        ]
+    },
+    {
+        "id": "40d4de28acebf38d",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Envío",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "1fbd72642e12a377",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "7515dbe474f16dcd",
+        "type": "debug",
+        "z": "d209909e0e46f2d8",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "d8c2da69ccec95cb",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Inicio de telegram",
+        "info": "",
+        "x": 340,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "9fc216ea3e6cb73e",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Continua con los valores recomendados",
+        "info": "",
+        "x": 390,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "f9fe2815aa0e225f",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Guarda los valores de los sensores llegados por mqtt en la base de datos",
+        "info": "",
+        "x": 320,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "4cc7a072aa416152",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Controla el estado de activo o desactivado del sistema según si hay alguien en la habitación.",
+        "info": "",
+        "x": 320,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ad6a4d9d98583fc4",
+        "type": "function",
+        "z": "d209909e0e46f2d8",
+        "name": "+ fecha",
+        "func": "msg.payload.date = new Date();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 520,
+        "wires": [
+            [
+                "e74c387ec68fb1c2"
+            ]
+        ]
+    },
+    {
+        "id": "e74c387ec68fb1c2",
+        "type": "mongodb out",
+        "z": "d209909e0e46f2d8",
+        "mongodb": "f605fa69.8f5008",
+        "name": "",
+        "collection": "datos_json",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 750,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "24f9bc85f5a82752",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Guarda el estado de presencia en la base de datos",
+        "info": "",
+        "x": 630,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "782943feb5a6f452",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Si no detecta nadie",
+        "info": "",
+        "x": 770,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5e0f1a7dfde779c3",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Inicia el sistema",
+        "info": "",
+        "x": 860,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "08750391cf6e2bfc",
+        "type": "comment",
+        "z": "d209909e0e46f2d8",
+        "name": "Apaga el sistema",
+        "info": "",
+        "x": 1520,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "79374c7cd62eb314",
+        "type": "inject",
+        "z": "d209909e0e46f2d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload.luminosidad",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 420,
+        "y": 860,
+        "wires": [
+            [
+                "de916dcf7e8cd2a7"
+            ]
+        ]
+    },
+    {
+        "id": "23e23252c67e0cc3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f0a162a1c048ea61",
+        "type": "telegram bot",
+        "botname": "PrealexaInfind_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "f605fa69.8f5008",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "II5",
+        "name": ""
+    },
+    {
+        "id": "d1853d609aa0e0a0",
+        "type": "ui_group",
+        "name": "Datos",
+        "tab": "5cf964493340939d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b0be032ffabbbbfe",
+        "type": "telegram bot",
+        "botname": "PrealexaInfind_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "5cf964493340939d",
+        "type": "ui_tab",
+        "name": "Trabajo domotica",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
