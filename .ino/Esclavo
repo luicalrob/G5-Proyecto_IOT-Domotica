@@ -110,20 +110,21 @@ void progreso_OTA(int x, int todo)
 #define COMMANDTOPIC "ESPNow/command"
 #define SERVICETOPIC "ESPNow/service"
 
-#define Topic_Tiempo "Infind/ESPNOW/Meteorologia"
-#define Topic_Estado "Infind/ESPNOW/Estado"
+#define Topic_Tiempo "infind/ESPNOW/Meteorologia"
+#define Topic_Estado "infind/ESPNOW/Estado"
 
 /* Set a private Mac Address
  *  http://serverfault.com/questions/40712/what-range-of-mac-addresses-can-i-safely-use-for-my-virtual-machines
  * Note: the point of setting a specific MAC is so you can replace this Gateway ESP8266 device with a new one
  * and the new gateway will still pick up the remote sensors which are still sending to the old MAC 
  */
- //48:3F:DA:0C:BA:34
+
  //CA:2B:96:2F:46:AA Mac de Pedro
  //F6:CF:A2:68:68:FC MAC de Luis
- uint8_t mac1[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};// MAC de Master 1
- uint8_t mac2[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};// MAC de MAster 2
- uint8_t mac3[] = {0xCA, 0x2B, 0x96, 0x2F, 0x46, 0xAA};// MAC de Master 3
+ //46:17:93:0D:4C:33 MAC de David
+ uint8_t mac1[] = {0xCA, 0x2B, 0x96, 0x2F, 0x46, 0xAA};// MAC de Master 1
+ uint8_t mac2[] = {0xCA, 0x2B, 0x96, 0x2F, 0x46, 0xAA};// MAC de MAster 2
+ uint8_t mac3[] = {0x46, 0x17, 0x93, 0x0D, 0x4C, 0x33};// MAC de Master 3
  
 uint8_t mac[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};// your MAC
 void initVariant() {
@@ -223,12 +224,14 @@ void loop() {
     sendToBroker(); 
     
     client.disconnect();
-    //delay(200);
+    delay(200);
     ESP.restart(); // <----- Reboots to re-enable ESP-NOW
   }
+  digitalWrite(LED_blink, HIGH);   // LED off
 }
 
 void sendToBroker() {
+  //Serial.printf("El tipo es %0.2f", tipo);
   if(tipo==1)
   {
     //Serial.println(sensorData_Est.tactil);
@@ -271,16 +274,17 @@ void initEspNow() {
     deviceMac += String(mac[4], HEX);
     deviceMac += String(mac[5], HEX);
      
-    if(mac==mac3)
+    if(mac[5]==mac3[5])
     {
       tipo=1;
+      Serial.printf("El tipo es %d", tipo);
       memcpy(&sensorData_Est, data, sizeof(sensorData_Est));
         struct mensaje1 mi_mensaje1;
       memcpy(&mi_mensaje1, data, sizeof(mi_mensaje1));
       
       Serial.print("Message received from device: "); 
       Serial.println(deviceMac);
-      //Serial.printf(" Tactil=%0.2f, Hum=%0.0f%%", sensorData.tactil, sensorData.presencia); 
+      //Serial.printf(" Tactil=%0.2f, Presencia=%0.0f%%", sensorData.tactil, sensorData.presencia); 
       Serial.print("\nBytes recibidos:");   
       Serial.println(len); 
       Serial.print("Tactil:");   
@@ -288,7 +292,7 @@ void initEspNow() {
       Serial.print("Presencia:");   
       Serial.println(mi_mensaje1.presencia); 
     }
-    if(mac==mac1 || mac==mac2)
+    if(mac[5]==mac1[5] || mac[5]==mac2[5])
     {
       tipo=2;
       memcpy(&sensorData_Temp, data, sizeof(sensorData_Temp));
@@ -323,12 +327,15 @@ void publishMQTT(String topic, String message) {
   if (!client.connected()) {
     reconnectMQTT();
   }
+  //Serial.printf("El tipo es %0.2f", tipo);
   if(tipo==1)
   {
+    digitalWrite(LED_blink, LOW);   // LED on
   client.publish(Topic_Estado, message.c_str());
   }
   if(tipo==2)
   {
+    digitalWrite(LED_blink, LOW);   // LED on
     client.publish(Topic_Tiempo, message.c_str());
   }
 }
@@ -353,7 +360,7 @@ void reconnectMQTT() {
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
       // Wait 5 seconds before retrying
-      delay(5000);
+      delay(2000);
     }
   }
 }
