@@ -105,15 +105,16 @@ void conecta_wifi() {
 
 
 //SENSOR TACTIL//
-const int sensorPin = 5;
+const int sensorPin = 5; //D1
 bool Cont_detectado = false;
 //SENSOR PRESENCIA//
 //int LEDPin= 2;
 const int PIRPin = 14; // D5
 
 //ESPNOW//
-// MAC placa LUIS: F6 CF A2 68 68 FC
+// MAC placa LUIS: F6:CF:A2:68:68:FC
 // MAC placa PEDRO: CA:2B:96:2F:46:AA
+// MAC placa DAVID: 46:17:93:0D:4C:33
 // this is the MAC Address of the remote ESP server which receives these sensor readings
 uint8_t remoteMac[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};
 #define WIFI_CHANNEL 4
@@ -160,7 +161,7 @@ void setup() {
 
   if (esp_now_init() != 0) {
     Serial.println("*** ESP_Now init failed");
-    gotoSleep();
+    //gotoSleep();
   }
 
   esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
@@ -179,21 +180,12 @@ void setup() {
 }
 
 void loop() {
-  //  if (callbackCalled || (millis() > SEND_TIMEOUT)) {
-  //    gotoSleep();
-  //  }
-  //  else {
-  Serial.print("\tMe llamo paco y he ccambiado el programa");
+
   //SENSOR PRESENCIA//
   int value = digitalRead(PIRPin);
-
   if (value == HIGH)
   {
     sensorData.presencia = true;
-    //    digitalWrite(LEDPin, HIGH);
-    delay(5);
-    //    digitalWrite(LEDPin, LOW);
-    delay(5);
   }
   else
   {
@@ -209,16 +201,11 @@ void loop() {
   {
     sensorData.tactil = true;
     Serial.println("Contacto detectado");
-    //aquí se ejecutarían las acciones
-    //digitalWrite(13,HIGH);
-    delay(1000);
   }
   else {
     sensorData.tactil = false;
   }
-
-  //digitalWrite(13,LOW);
-
+  
   //Serial.printf("presencia=%01f, tactil=%01f", sensorData.presencia, sensorData.tactil);
   Serial.print(sensorData.presencia, 1);
   Serial.print("\t\t");
