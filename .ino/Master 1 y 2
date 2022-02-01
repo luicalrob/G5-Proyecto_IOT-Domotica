@@ -197,12 +197,6 @@ void loop() {
       
    Serial.println(brightness);
   
-//   if (input > threshold) {
-//      digitalWrite(LEDPin, HIGH);
-//   }
-//   else {
-//      digitalWrite(LEDPin, LOW);
-//   }
    
   }
 }
