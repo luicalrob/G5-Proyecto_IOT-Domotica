@@ -190,7 +190,7 @@ void loop() {
   else
   {
     sensorData.presencia = false;
-    //    digitalWrite(LEDPin, LOW);
+    
   }
 
   //SENSOR TACTIL
@@ -204,6 +204,7 @@ void loop() {
   }
   else {
     sensorData.tactil = false;
+
   }
   
   //Serial.printf("presencia=%01f, tactil=%01f", sensorData.presencia, sensorData.tactil);
