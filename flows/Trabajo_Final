@@ -1,15 +1,15 @@
 [
     {
-        "id": "d209909e0e46f2d8",
+        "id": "d52572a34c4747ee",
         "type": "tab",
-        "label": "Trabajo_Final_2",
+        "label": "Trabajo_Final",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "515fc0c1c3cbc5aa",
+        "id": "17da20a20a7e14fe",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "active": false,
         "tosidebar": true,
@@ -19,14 +19,14 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 350,
-        "y": 80,
+        "x": 270,
+        "y": 140,
         "wires": []
     },
     {
-        "id": "d30a20f3105f3a06",
+        "id": "26176efa40e0d289",
         "type": "mqtt in",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "topic": "infind/ESPNOW/+",
         "qos": "2",
@@ -39,14 +39,16 @@
         "y": 80,
         "wires": [
             [
-                "515fc0c1c3cbc5aa"
+                "17da20a20a7e14fe",
+                "23b630a1680f192f",
+                "e7171441a38f9c82"
             ]
         ]
     },
     {
-        "id": "a19771552be40497",
+        "id": "79c78fb62fb80153",
         "type": "mqtt in",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "topic": "infind/ESPNOW/Estado",
         "qos": "2",
@@ -55,18 +57,19 @@
         "nl": false,
         "rap": true,
         "rh": 0,
-        "x": 100,
+        "x": 140,
         "y": 620,
         "wires": [
             [
-                "61f84ba96a25015a"
+                "3a5fed6dd61f3fad",
+                "aaf33ab1c481dda7"
             ]
         ]
     },
     {
-        "id": "61f84ba96a25015a",
+        "id": "3a5fed6dd61f3fad",
         "type": "json",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "payload",
         "action": "",
@@ -75,17 +78,17 @@
         "y": 620,
         "wires": [
             [
-                "c6027c60e115c1bc",
-                "8ab66b5e41738c47",
-                "924393e493d3d291",
-                "ad6a4d9d98583fc4"
+                "545c641c07797d34",
+                "2aedd8a1c5381c62",
+                "48129b997bc9a348",
+                "90b593d84854b4b2"
             ]
         ]
     },
     {
-        "id": "c6027c60e115c1bc",
+        "id": "545c641c07797d34",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sensor tactil",
         "rules": [
             {
@@ -112,14 +115,14 @@
         "y": 280,
         "wires": [
             [
-                "2fd35b666fe18da4"
+                "e6bb27defc802807"
             ]
         ]
     },
     {
-        "id": "8ab66b5e41738c47",
+        "id": "2aedd8a1c5381c62",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sensor presencia",
         "rules": [
             {
@@ -146,14 +149,14 @@
         "y": 620,
         "wires": [
             [
-                "26660857bbf70aef"
+                "0c28e6eb35124f55"
             ]
         ]
     },
     {
-        "id": "924393e493d3d291",
+        "id": "48129b997bc9a348",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -167,9 +170,9 @@
         "wires": []
     },
     {
-        "id": "5ea0cb84bb10f897",
+        "id": "9edd3b3ceab7354b",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Temperatura",
         "rules": [
             {
@@ -203,14 +206,14 @@
         "y": 1120,
         "wires": [
             [
-                "0b29990b16ab04c7"
+                "6898ea72646eeba1"
             ]
         ]
     },
     {
-        "id": "4343edd9ab74bbcf",
+        "id": "b32edd1fc3908df6",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Humedad",
         "rules": [
             {
@@ -244,14 +247,14 @@
         "y": 1180,
         "wires": [
             [
-                "0b29990b16ab04c7"
+                "6898ea72646eeba1"
             ]
         ]
     },
     {
-        "id": "de916dcf7e8cd2a7",
+        "id": "a359a61ab84fd428",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Luminosidad",
         "rules": [
             {
@@ -285,15 +288,15 @@
         "y": 1240,
         "wires": [
             [
-                "0b29990b16ab04c7",
-                "5eb915eab9be9518"
+                "6898ea72646eeba1",
+                "540ff4884da72c6f"
             ]
         ]
     },
     {
-        "id": "ef196c6ac6b87d44",
+        "id": "995af3da9526246a",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -305,9 +308,9 @@
         ]
     },
     {
-        "id": "e13946f8791c328b",
+        "id": "f4b78ebd3a22981e",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "mensaje bienvenida",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola \"+msg.originalMessage.from.first_name+\", la temperatura actualmente es de \"+flow.get(\"temperatura\")+\"º y la humedad es de \"+flow.get(\"humedad\")+\". Con estos valores te recomendamos musica \"+flow.get(\"tipo_musica\")+\", con un color de luces \"+flow.get(\"tipo_luces\")+\"\\nSi esta de acuerdo escriba el comando /continua \\n\\nSi prefiere otro tipo de escena escriba uno de los siguientes comandos: \\n/triste \\n/alegre \\n/chill (musica tranquila) \\n/bailar\\n\\n Si simplemente quiere la luz blanca y estar con sonido instrumental escriba el comando /concentracion\\n\\nSi desea volver al inicio y solo tener luz sin música simplemente escriba el comando /blanco_solo\\n\\n\\n Cuando su sesión termine se apagará el sistema solo, no obstante, puede apagarlo manualmente mediante el comando /apagar\";\n return msg;\n}",
         "outputs": 1,
@@ -319,14 +322,14 @@
         "y": 1560,
         "wires": [
             [
-                "ef196c6ac6b87d44"
+                "995af3da9526246a"
             ]
         ]
     },
     {
-        "id": "cc3ec0bed2a01c03",
+        "id": "1cda9e556da4c917",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -341,9 +344,9 @@
         "wires": []
     },
     {
-        "id": "57ab8724ee488f79",
+        "id": "486ec0240dbf8c49",
         "type": "telegram receiver",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "saveDataDir": "",
@@ -352,16 +355,16 @@
         "y": 1480,
         "wires": [
             [
-                "cc3ec0bed2a01c03",
-                "0831251dc792b5a4"
+                "1cda9e556da4c917",
+                "a0461f2c0dd626a9"
             ],
             []
         ]
     },
     {
-        "id": "6770118b17eade9e",
+        "id": "c190a0bc6a304232",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/start",
         "description": "",
@@ -378,15 +381,15 @@
         "y": 1540,
         "wires": [
             [
-                "0831251dc792b5a4"
+                "a0461f2c0dd626a9"
             ],
             []
         ]
     },
     {
-        "id": "7c2fb93c487b928d",
+        "id": "79c14b2f97305a8f",
         "type": "mqtt in",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "topic": "infind/ESPNOW/Metereologia",
         "qos": "2",
@@ -399,14 +402,14 @@
         "y": 1120,
         "wires": [
             [
-                "3aa038b7bd5ab8f0"
+                "82f74270fd207f41"
             ]
         ]
     },
     {
-        "id": "3aa038b7bd5ab8f0",
+        "id": "82f74270fd207f41",
         "type": "json",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "payload",
         "action": "",
@@ -415,19 +418,19 @@
         "y": 1120,
         "wires": [
             [
-                "5ea0cb84bb10f897",
-                "4343edd9ab74bbcf",
-                "de916dcf7e8cd2a7",
-                "4d7e71febc8550d5"
+                "9edd3b3ceab7354b",
+                "b32edd1fc3908df6",
+                "a359a61ab84fd428",
+                "30c0aace10cb9729"
             ]
         ]
     },
     {
-        "id": "79948649b477077e",
+        "id": "27bd959c6c9b5053",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Tipo de sesion",
-        "func": "var temp=msg.payload.temp_media;\nvar lum=msg.payload.lum_media;\n\nif (temp < 20 && lum < 20)\n{\n    flow.set(\"tipo_musica\", \"triste\");\n    flow.set(\"tipo_luces\", \"azul\");\n}\nelse if (temp < 23 && lum > 70)\n{\n    flow.set(\"tipo_musica\", \"alegre\");\n    flow.set(\"tipo_luces\", \"verdes\");\n}\nelse\n{\n    flow.set(\"tipo_musica\", \"chill\");\n    flow.set(\"tipo_luces\", \"mostaza\")\n}\n\nreturn msg;",
+        "func": "var temp=msg.payload.temp_media;\nvar lum=msg.payload.lum_media;\nflow.set(\"temp\",temp);\n\nif (temp < 20 && lum < 20)\n{\n    flow.set(\"tipo_musica\", \"triste\");\n    flow.set(\"tipo_luces\", \"azul\");\n}\nelse if (temp < 23 && lum > 70)\n{\n    flow.set(\"tipo_musica\", \"alegre\");\n    flow.set(\"tipo_luces\", \"verdes\");\n}\nelse\n{\n    flow.set(\"tipo_musica\", \"chill\");\n    flow.set(\"tipo_luces\", \"mostaza\")\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -440,9 +443,9 @@
         ]
     },
     {
-        "id": "05f1ecba3263c0b8",
+        "id": "54833addc1227c76",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/continua",
         "description": "",
@@ -459,15 +462,15 @@
         "y": 1920,
         "wires": [
             [
-                "697d7d32f7917132"
+                "ec9ccb9308d69f3b"
             ],
             []
         ]
     },
     {
-        "id": "0583824da1629714",
+        "id": "c48898c75f072130",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando estilo musica",
         "func": "var comando = flow.get(\"comando_musica\");\nvar estilo = flow.get(\"tipo_musica\");\nvar comilla = flow.get(\"comilla\")\n\nmsg.payload = comando + comilla + estilo + comilla;\n\nreturn msg;",
         "outputs": 1,
@@ -479,14 +482,14 @@
         "y": 1920,
         "wires": [
             [
-                "d493839439c2ec91"
+                "ab00764b62829054"
             ]
         ]
     },
     {
-        "id": "f9db14ddf5aaa23a",
+        "id": "96d212e2ab8f3a72",
         "type": "mongodb out",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "mongodb": "f605fa69.8f5008",
         "name": "",
         "collection": "datos_json",
@@ -499,9 +502,9 @@
         "wires": []
     },
     {
-        "id": "4d7e71febc8550d5",
+        "id": "30c0aace10cb9729",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "+ fecha",
         "func": "msg.payload.date = new Date();\nreturn msg;",
         "outputs": 1,
@@ -513,20 +516,20 @@
         "y": 1060,
         "wires": [
             [
-                "f9db14ddf5aaa23a"
+                "96d212e2ab8f3a72"
             ]
         ]
     },
     {
-        "id": "0b29990b16ab04c7",
+        "id": "6898ea72646eeba1",
         "type": "ui_chart",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "group": "d1853d609aa0e0a0",
         "order": 0,
         "width": 0,
         "height": 0,
-        "label": "chart",
+        "label": "Datos detectados en las últimas 2 horas",
         "chartType": "line",
         "legend": "true",
         "xformat": "HH:mm:ss",
@@ -535,7 +538,7 @@
         "dot": false,
         "ymin": "",
         "ymax": "",
-        "removeOlder": 1,
+        "removeOlder": "2",
         "removeOlderPoints": "",
         "removeOlderUnit": "3600",
         "cutout": 0,
@@ -555,16 +558,16 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 1070,
+        "x": 1180,
         "y": 1160,
         "wires": [
             []
         ]
     },
     {
-        "id": "0f57ea4348e3b738",
+        "id": "1d3f38d8130cb69d",
         "type": "mongodb in",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "mongodb": "f605fa69.8f5008",
         "name": "",
         "collection": "datos_json",
@@ -573,14 +576,14 @@
         "y": 220,
         "wires": [
             [
-                "8285fa4ad3fd6945"
+                "a344280ba3106234"
             ]
         ]
     },
     {
-        "id": "0724bde195f3f7e6",
+        "id": "5aeebc6f6e55f95a",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Seleccionar 10 últimos valores",
         "func": "msg.payload = {};\nmsg.limit = 10;\nmsg.sort = {\"date\" : -1};\nreturn msg;",
         "outputs": 1,
@@ -592,14 +595,14 @@
         "y": 220,
         "wires": [
             [
-                "0f57ea4348e3b738"
+                "1d3f38d8130cb69d"
             ]
         ]
     },
     {
-        "id": "8285fa4ad3fd6945",
+        "id": "a344280ba3106234",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Calcular medias",
         "func": "var tempmedia=0;\nvar lummedia=0;\n\nfor (var i = 0; i < msg.payload.length; i++) { \n    tempmedia=tempmedia+msg.payload[i].temperatura;\n    lummedia=lummedia+msg.payload[i].luminosidad;\n}\n\ntempmedia=tempmedia/msg.payload.length;\nlummedia=lummedia/msg.payload.length;\n    \nmsg.payload.temp_media=tempmedia;\nmsg.payload.lum_media=lummedia;\n\nreturn msg;  ",
         "outputs": "1",
@@ -611,14 +614,14 @@
         "y": 220,
         "wires": [
             [
-                "79948649b477077e"
+                "27bd959c6c9b5053"
             ]
         ]
     },
     {
-        "id": "7a0926c76df606fb",
+        "id": "8ac7c09939c2cddb",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/triste",
         "description": "",
@@ -635,15 +638,15 @@
         "y": 2300,
         "wires": [
             [
-                "c17ca3ac03854215"
+                "c849f1f5a1a54935"
             ],
             []
         ]
     },
     {
-        "id": "b0d7a952ecb59e23",
+        "id": "63587b4a7a8aa0d0",
         "type": "exec",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "command": "",
         "addpay": "payload",
         "append": "",
@@ -656,18 +659,18 @@
         "y": 2740,
         "wires": [
             [
-                "ce4f4b5a0da4425f"
+                "b5535973d6e17ac8"
             ],
             [
-                "b5fe31330714e66f"
+                "c1794c3555dcbf6e"
             ],
             []
         ]
     },
     {
-        "id": "3b9fdb733b8cdb4e",
+        "id": "f15dea4ac86b0681",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando escena triste",
         "rules": [
             {
@@ -687,14 +690,14 @@
         "y": 2320,
         "wires": [
             [
-                "b0d7a952ecb59e23"
+                "63587b4a7a8aa0d0"
             ]
         ]
     },
     {
-        "id": "b5fe31330714e66f",
+        "id": "c1794c3555dcbf6e",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Error",
         "active": true,
         "tosidebar": true,
@@ -709,9 +712,9 @@
         "wires": []
     },
     {
-        "id": "ce4f4b5a0da4425f",
+        "id": "b5535973d6e17ac8",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Envío",
         "active": true,
         "tosidebar": true,
@@ -726,9 +729,9 @@
         "wires": []
     },
     {
-        "id": "12b7c4fbd4a98161",
+        "id": "342c6039042b1d33",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/alegre",
         "description": "",
@@ -745,15 +748,15 @@
         "y": 2480,
         "wires": [
             [
-                "7d9ba288af829f26"
+                "1659674e87ed4f3b"
             ],
             []
         ]
     },
     {
-        "id": "2523ad2225a1e36e",
+        "id": "aa1c0ebae8823088",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/chill",
         "description": "",
@@ -770,15 +773,15 @@
         "y": 2620,
         "wires": [
             [
-                "37a82caa9f743536"
+                "faadda1539e84c62"
             ],
             []
         ]
     },
     {
-        "id": "0b0e50f2929b11c5",
+        "id": "8d7cdf1d1e920745",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/bailar",
         "description": "",
@@ -795,15 +798,15 @@
         "y": 2760,
         "wires": [
             [
-                "824cd3ac5ba2e145"
+                "2c673a5577a52109"
             ],
             []
         ]
     },
     {
-        "id": "8e4ecbc5a601d410",
+        "id": "8f7828becd005add",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando escena alegre",
         "rules": [
             {
@@ -823,14 +826,14 @@
         "y": 2500,
         "wires": [
             [
-                "b0d7a952ecb59e23"
+                "63587b4a7a8aa0d0"
             ]
         ]
     },
     {
-        "id": "1c6c2e6b9364ba8d",
+        "id": "6b7f39b588362c7b",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando escena chill",
         "rules": [
             {
@@ -850,14 +853,14 @@
         "y": 2640,
         "wires": [
             [
-                "b0d7a952ecb59e23"
+                "63587b4a7a8aa0d0"
             ]
         ]
     },
     {
-        "id": "e6b89ea99c9481d8",
+        "id": "3d88a53a3dc4058e",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando escena bailar",
         "rules": [
             {
@@ -877,14 +880,14 @@
         "y": 2780,
         "wires": [
             [
-                "b0d7a952ecb59e23"
+                "63587b4a7a8aa0d0"
             ]
         ]
     },
     {
-        "id": "f5f1c0de78a6c84d",
+        "id": "48b2bec0cc93bc49",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Para reproducir las rutinas de escenas según el estado indicado en telegram",
         "info": "",
         "x": 350,
@@ -892,9 +895,9 @@
         "wires": []
     },
     {
-        "id": "2fd35b666fe18da4",
+        "id": "e6bb27defc802807",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
@@ -912,15 +915,15 @@
         "y": 280,
         "wires": [
             [
-                "0724bde195f3f7e6",
-                "fe6e0205424e206f"
+                "5aeebc6f6e55f95a",
+                "d4b52702f5982f89"
             ]
         ]
     },
     {
-        "id": "26660857bbf70aef",
+        "id": "0c28e6eb35124f55",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "function",
         "func": "if(flow.get(\"Estado_sistema\")==1)\n{\n\n    msg.limit = 1;\n    msg.sort={\"date\":-1};\n\n    flow.set(\"buscar\",0);\n    return msg;\n}",
         "outputs": 1,
@@ -932,14 +935,14 @@
         "y": 620,
         "wires": [
             [
-                "e41fa096801b7520"
+                "5b37efdfcb068ad3"
             ]
         ]
     },
     {
-        "id": "e41fa096801b7520",
+        "id": "5b37efdfcb068ad3",
         "type": "mongodb in",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "mongodb": "f605fa69.8f5008",
         "name": "",
         "collection": "datos_json",
@@ -948,14 +951,14 @@
         "y": 620,
         "wires": [
             [
-                "0d6f562d5e816477"
+                "9796f2dd3cd8743b"
             ]
         ]
     },
     {
-        "id": "0d6f562d5e816477",
+        "id": "9796f2dd3cd8743b",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Apagar sist",
         "func": "var presencia=msg.payload[0].presencia;\nvar fecha=msg.payload[0].date;\n\n\nvar ultima_fecha = flow.get(\"ultima_fecha\");\nvar ahora = new Date();\nvar fecha_actual = ahora.getTime();\n//El valor devuelto por el metodo getTime() es el número \n//de milisegundos desde el 1 de enero de 1970 00:00:00 UTC.\n\nif(presencia==1) \n{\n    \n    flow.set(\"ultima_fecha\",ahora.getTime());\n}\nelse    // ninguno esta activo, trabajamos con el tiempo\n{\n    if((fecha_actual-ultima_fecha)>2400)\n    //5 minutos x 60 segundos x 10 = 3000 milisegundos\n    {\n       flow.set(\"Estado_sistema\",0); \n    }\n}\n\nreturn msg;",
         "outputs": 1,
@@ -967,14 +970,14 @@
         "y": 620,
         "wires": [
             [
-                "083252885218cfe0"
+                "356ea346068584db"
             ]
         ]
     },
     {
-        "id": "083252885218cfe0",
+        "id": "356ea346068584db",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -992,14 +995,14 @@
         "y": 620,
         "wires": [
             [
-                "b22b5e9cda289332"
+                "fe16437d9249a8c2"
             ]
         ]
     },
     {
-        "id": "b22b5e9cda289332",
+        "id": "fe16437d9249a8c2",
         "type": "exec",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "command": "./alexa_remote_control.sh -d \"EchoDotDeDavid\" -e automation:\"Nadie\"",
         "addpay": "",
         "append": "",
@@ -1012,18 +1015,18 @@
         "y": 620,
         "wires": [
             [
-                "93b6606f050f8ddd"
+                "338131e3344249a6"
             ],
             [
-                "82006cc60247bdc4"
+                "703924ee74b8e27e"
             ],
             []
         ]
     },
     {
-        "id": "82006cc60247bdc4",
+        "id": "703924ee74b8e27e",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Error",
         "active": true,
         "tosidebar": true,
@@ -1038,9 +1041,9 @@
         "wires": []
     },
     {
-        "id": "93b6606f050f8ddd",
+        "id": "338131e3344249a6",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Envío",
         "active": true,
         "tosidebar": true,
@@ -1055,9 +1058,9 @@
         "wires": []
     },
     {
-        "id": "282297b67ad8fb98",
+        "id": "ecaba17a861a77dd",
         "type": "exec",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "command": "",
         "addpay": "payload",
         "append": "",
@@ -1070,18 +1073,18 @@
         "y": 360,
         "wires": [
             [
-                "54d36a449d17f401"
+                "0f4f2a7013ab19e8"
             ],
             [
-                "413a97f7aec68cf4"
+                "bc9f56783f9e4498"
             ],
             []
         ]
     },
     {
-        "id": "413a97f7aec68cf4",
+        "id": "bc9f56783f9e4498",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Error",
         "active": true,
         "tosidebar": true,
@@ -1096,9 +1099,9 @@
         "wires": []
     },
     {
-        "id": "54d36a449d17f401",
+        "id": "0f4f2a7013ab19e8",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Envío",
         "active": true,
         "tosidebar": true,
@@ -1113,9 +1116,9 @@
         "wires": []
     },
     {
-        "id": "d493839439c2ec91",
+        "id": "ab00764b62829054",
         "type": "exec",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "command": "",
         "addpay": "payload",
         "append": "",
@@ -1128,18 +1131,18 @@
         "y": 1940,
         "wires": [
             [
-                "40d4de28acebf38d"
+                "e0625dfe0fe7095f"
             ],
             [
-                "1fbd72642e12a377"
+                "de387ddf40d5f34f"
             ],
             []
         ]
     },
     {
-        "id": "40d4de28acebf38d",
+        "id": "e0625dfe0fe7095f",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Envío",
         "active": true,
         "tosidebar": true,
@@ -1154,9 +1157,9 @@
         "wires": []
     },
     {
-        "id": "1fbd72642e12a377",
+        "id": "de387ddf40d5f34f",
         "type": "debug",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Error",
         "active": true,
         "tosidebar": true,
@@ -1171,9 +1174,9 @@
         "wires": []
     },
     {
-        "id": "d8c2da69ccec95cb",
+        "id": "032fc1347113fb2b",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Inicio y control del bot de Telegram",
         "info": "",
         "x": 280,
@@ -1181,9 +1184,9 @@
         "wires": []
     },
     {
-        "id": "9fc216ea3e6cb73e",
+        "id": "8a6d5192e118edaf",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Continua con los valores recomendados",
         "info": "",
         "x": 230,
@@ -1191,9 +1194,9 @@
         "wires": []
     },
     {
-        "id": "f9fe2815aa0e225f",
+        "id": "c1c05dcc328fd5a6",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Guarda los valores de los sensores llegados por mqtt en la base de datos",
         "info": "",
         "x": 300,
@@ -1201,9 +1204,9 @@
         "wires": []
     },
     {
-        "id": "4cc7a072aa416152",
+        "id": "47db1417b1d6dedc",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Control del estado del sistema (Activado/Desactivado) según haya alguien o no.",
         "info": "",
         "x": 280,
@@ -1211,9 +1214,9 @@
         "wires": []
     },
     {
-        "id": "ad6a4d9d98583fc4",
+        "id": "90b593d84854b4b2",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "+ fecha",
         "func": "msg.payload.date = new Date();\nreturn msg;",
         "outputs": 1,
@@ -1225,14 +1228,14 @@
         "y": 820,
         "wires": [
             [
-                "e74c387ec68fb1c2"
+                "084ce5374ae1d56a"
             ]
         ]
     },
     {
-        "id": "e74c387ec68fb1c2",
+        "id": "084ce5374ae1d56a",
         "type": "mongodb out",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "mongodb": "f605fa69.8f5008",
         "name": "",
         "collection": "datos_json",
@@ -1245,9 +1248,9 @@
         "wires": []
     },
     {
-        "id": "24f9bc85f5a82752",
+        "id": "e6733b15b06adfa8",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Guarda el estado de presencia en la base de datos",
         "info": "",
         "x": 850,
@@ -1255,9 +1258,9 @@
         "wires": []
     },
     {
-        "id": "782943feb5a6f452",
+        "id": "da99a4bd467a643d",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Control de apagado del sistema en caso de ausencia de personas",
         "info": "",
         "x": 1100,
@@ -1265,9 +1268,9 @@
         "wires": []
     },
     {
-        "id": "5e0f1a7dfde779c3",
+        "id": "2c94ca31bc7cddff",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Inicia el sistema",
         "info": "",
         "x": 900,
@@ -1275,9 +1278,9 @@
         "wires": []
     },
     {
-        "id": "08750391cf6e2bfc",
+        "id": "2843c28d9a544382",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Apaga el sistema",
         "info": "",
         "x": 1720,
@@ -1285,9 +1288,9 @@
         "wires": []
     },
     {
-        "id": "8b9fef39bee2ba86",
+        "id": "1285f5e0b5a59303",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Recoge todos los datos enviados de la placa",
         "info": "",
         "x": 170,
@@ -1295,9 +1298,9 @@
         "wires": []
     },
     {
-        "id": "a146f6fe365e7424",
+        "id": "f31a56445b4c1a91",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando color luces",
         "func": "var comando = flow.get(\"comando_orden\");\nvar estilo = flow.get(\"tipo_luces\");\nvar comilla = flow.get(\"comilla\");\n\nmsg.payload = comando + comilla + \"Pon las  luces de color \" + estilo + comilla;\n\nreturn msg;\n",
         "outputs": 1,
@@ -1309,14 +1312,14 @@
         "y": 1980,
         "wires": [
             [
-                "d493839439c2ec91"
+                "ab00764b62829054"
             ]
         ]
     },
     {
-        "id": "51c71c389c8cbd0d",
+        "id": "8c471336fefc93a6",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Determina que estilo de sesión tener según los valores de temperatura y luminosidad",
         "info": "",
         "x": 1390,
@@ -1324,9 +1327,9 @@
         "wires": []
     },
     {
-        "id": "697d7d32f7917132",
+        "id": "ec9ccb9308d69f3b",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1349,18 +1352,18 @@
         "y": 1920,
         "wires": [
             [
-                "eae9caf693ff1047"
+                "fe20c78f76565b8f"
             ],
             [
-                "0583824da1629714",
-                "a146f6fe365e7424"
+                "c48898c75f072130",
+                "f31a56445b4c1a91"
             ]
         ]
     },
     {
-        "id": "20091e22792bf2ac",
+        "id": "e52e630d224c4231",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1372,9 +1375,9 @@
         ]
     },
     {
-        "id": "4bf7992265f77e7a",
+        "id": "3705bbc79654c302",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/concentracion",
         "description": "",
@@ -1391,15 +1394,15 @@
         "y": 2880,
         "wires": [
             [
-                "ac4c6db5bbbedaa9"
+                "5b06fb59fffeeba3"
             ],
             []
         ]
     },
     {
-        "id": "6d98c46763dbe5e4",
+        "id": "2cc60525d28df0b5",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando escena concentracion",
         "func": "var comando = flow.get(\"comando_musica\");\nvar estilo = \"Instrumental\";\nvar comilla = flow.get(\"comilla\");\n\nmsg.payload = comando + comilla+estilo+comilla;\n\nreturn msg;",
         "outputs": 1,
@@ -1411,14 +1414,14 @@
         "y": 2920,
         "wires": [
             [
-                "b0d7a952ecb59e23"
+                "63587b4a7a8aa0d0"
             ]
         ]
     },
     {
-        "id": "0831251dc792b5a4",
+        "id": "a0461f2c0dd626a9",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1441,17 +1444,17 @@
         "y": 1520,
         "wires": [
             [
-                "ee1a3a540f0a4e43"
+                "c9f0eeca5a74ea8c"
             ],
             [
-                "e13946f8791c328b"
+                "f4b78ebd3a22981e"
             ]
         ]
     },
     {
-        "id": "465e2ed105e774b6",
+        "id": "51c0564c6ee59ee6",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1463,9 +1466,9 @@
         ]
     },
     {
-        "id": "ee1a3a540f0a4e43",
+        "id": "c9f0eeca5a74ea8c",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "mensaje bienvenida",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola \"+msg.originalMessage.from.first_name+\", el sistema está actualmente apagado debido a que no hay nadie. Sepa que la temperatura actualmente en el cuarto es de \"+flow.get(\"temperatura\")+\"º y la humedad es de \"+flow.get(\"humedad\")+\". \\n Si desea puede activarlo manualmente con el comando /inicio, aunque, sepa que si no hay nadie se apagará para ahorrar energía.\";\n return msg;\n}",
         "outputs": 1,
@@ -1477,14 +1480,14 @@
         "y": 1500,
         "wires": [
             [
-                "465e2ed105e774b6"
+                "51c0564c6ee59ee6"
             ]
         ]
     },
     {
-        "id": "06d7f0ca0e44b480",
+        "id": "26467b60b55d2f50",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/inicio",
         "description": "",
@@ -1501,15 +1504,15 @@
         "y": 1620,
         "wires": [
             [
-                "e13946f8791c328b"
+                "f4b78ebd3a22981e"
             ],
             []
         ]
     },
     {
-        "id": "6d1271d86ecae837",
+        "id": "d6fb73ee8cb1e982",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Inicio manual",
         "info": "",
         "x": 890,
@@ -1517,9 +1520,9 @@
         "wires": []
     },
     {
-        "id": "c17ca3ac03854215",
+        "id": "c849f1f5a1a54935",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1542,17 +1545,17 @@
         "y": 2300,
         "wires": [
             [
-                "f16596968ea06415"
+                "e7e983dc6e7ab3ac"
             ],
             [
-                "3b9fdb733b8cdb4e"
+                "f15dea4ac86b0681"
             ]
         ]
     },
     {
-        "id": "f16596968ea06415",
+        "id": "e7e983dc6e7ab3ac",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Lo siento \"+msg.originalMessage.from.first_name+\", el sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -1564,14 +1567,14 @@
         "y": 2280,
         "wires": [
             [
-                "e9998a397fa4ca2f"
+                "353a26b9b98bfbf5"
             ]
         ]
     },
     {
-        "id": "e9998a397fa4ca2f",
+        "id": "353a26b9b98bfbf5",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1583,9 +1586,9 @@
         ]
     },
     {
-        "id": "7d9ba288af829f26",
+        "id": "1659674e87ed4f3b",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1608,17 +1611,17 @@
         "y": 2480,
         "wires": [
             [
-                "a48ebd93b9f11057"
+                "d23fad19cef49b69"
             ],
             [
-                "8e4ecbc5a601d410"
+                "8f7828becd005add"
             ]
         ]
     },
     {
-        "id": "3797133aa4f81612",
+        "id": "0e24a3a930914b4f",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1630,9 +1633,9 @@
         ]
     },
     {
-        "id": "4be504b48c62b250",
+        "id": "5bb8025ab59c5cd8",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1644,9 +1647,9 @@
         ]
     },
     {
-        "id": "37a82caa9f743536",
+        "id": "faadda1539e84c62",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1669,17 +1672,17 @@
         "y": 2620,
         "wires": [
             [
-                "81a20a0c7ba3fc0e"
+                "064cabe6f6d784fa"
             ],
             [
-                "1c6c2e6b9364ba8d"
+                "6b7f39b588362c7b"
             ]
         ]
     },
     {
-        "id": "a48ebd93b9f11057",
+        "id": "d23fad19cef49b69",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Lo siento \"+msg.originalMessage.from.first_name+\", el sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -1691,14 +1694,14 @@
         "y": 2460,
         "wires": [
             [
-                "3797133aa4f81612"
+                "0e24a3a930914b4f"
             ]
         ]
     },
     {
-        "id": "81a20a0c7ba3fc0e",
+        "id": "064cabe6f6d784fa",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Lo siento \"+msg.originalMessage.from.first_name+\", el sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -1710,14 +1713,14 @@
         "y": 2600,
         "wires": [
             [
-                "4be504b48c62b250"
+                "5bb8025ab59c5cd8"
             ]
         ]
     },
     {
-        "id": "824cd3ac5ba2e145",
+        "id": "2c673a5577a52109",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1740,17 +1743,17 @@
         "y": 2760,
         "wires": [
             [
-                "1b424bb2aebe828d"
+                "ef4919a472e394da"
             ],
             [
-                "e6b89ea99c9481d8"
+                "3d88a53a3dc4058e"
             ]
         ]
     },
     {
-        "id": "1b424bb2aebe828d",
+        "id": "ef4919a472e394da",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Lo siento \"+msg.originalMessage.from.first_name+\", el sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -1762,14 +1765,14 @@
         "y": 2740,
         "wires": [
             [
-                "fa92adf2c17f5663"
+                "60858f738952a5fb"
             ]
         ]
     },
     {
-        "id": "fa92adf2c17f5663",
+        "id": "60858f738952a5fb",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1781,9 +1784,9 @@
         ]
     },
     {
-        "id": "ac4c6db5bbbedaa9",
+        "id": "5b06fb59fffeeba3",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1806,17 +1809,17 @@
         "y": 2880,
         "wires": [
             [
-                "367a191635dc532a"
+                "8531293b8f074b92"
             ],
             [
-                "6d98c46763dbe5e4"
+                "2cc60525d28df0b5"
             ]
         ]
     },
     {
-        "id": "367a191635dc532a",
+        "id": "8531293b8f074b92",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Lo siento \"+msg.originalMessage.from.first_name+\", el sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -1828,14 +1831,14 @@
         "y": 2860,
         "wires": [
             [
-                "35d041aec56409a3"
+                "6c10d83980085056"
             ]
         ]
     },
     {
-        "id": "35d041aec56409a3",
+        "id": "6c10d83980085056",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1847,9 +1850,9 @@
         ]
     },
     {
-        "id": "fe6e0205424e206f",
+        "id": "d4b52702f5982f89",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "rules": [
             {
@@ -1897,15 +1900,15 @@
         "y": 360,
         "wires": [
             [
-                "5521e08a1a4d1056",
-                "4aa783298c529e99"
+                "f1c087a996d35308",
+                "51252525f5862e6e"
             ]
         ]
     },
     {
-        "id": "15db245e86d07fe5",
+        "id": "b9ed41aba0e54e98",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/blanco_solo",
         "description": "",
@@ -1922,15 +1925,15 @@
         "y": 3060,
         "wires": [
             [
-                "b3b63e156dfdc5fa"
+                "ef6e092b6f2bdafa"
             ],
             []
         ]
     },
     {
-        "id": "b3b63e156dfdc5fa",
+        "id": "ef6e092b6f2bdafa",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -1953,18 +1956,18 @@
         "y": 3040,
         "wires": [
             [
-                "8f2815c14a5395e6"
+                "6ff860b5feca42a5"
             ],
             [
-                "c65609ef55c2ee45",
-                "94c5a0dfc09520b5"
+                "e658e93725edc1fe",
+                "cc3e3374bdc0d889"
             ]
         ]
     },
     {
-        "id": "8f2815c14a5395e6",
+        "id": "6ff860b5feca42a5",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Lo siento \"+msg.originalMessage.from.first_name+\", el sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -1976,14 +1979,14 @@
         "y": 3020,
         "wires": [
             [
-                "985b33b213945e23"
+                "c0086543bedc07d1"
             ]
         ]
     },
     {
-        "id": "985b33b213945e23",
+        "id": "c0086543bedc07d1",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -1995,9 +1998,9 @@
         ]
     },
     {
-        "id": "c65609ef55c2ee45",
+        "id": "e658e93725edc1fe",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando fin musica",
         "func": "var comando = flow.get(\"comando_orden\");\nvar orden = \"Parar\";\nvar comilla = flow.get(\"comilla\");\n\nmsg.payload = comando + comilla + orden + comilla;\n\nreturn msg;",
         "outputs": 1,
@@ -2009,14 +2012,14 @@
         "y": 3080,
         "wires": [
             [
-                "b0d7a952ecb59e23"
+                "63587b4a7a8aa0d0"
             ]
         ]
     },
     {
-        "id": "93a4bb8c4c958150",
+        "id": "eb164ccc4e233044",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Regular brillo",
         "func": "if(flow.get(\"Estado_sistema\")==1)\n{\n    var comando = flow.get(\"comando_orden\");\n    var luz = flow.get(\"luminosidad_media\");\n    var comilla = flow.get(\"comilla\");\n    \n    msg.payload = comando + comilla + \"Pon las  luces al \" + luz + comilla;\n    \n    return msg;\n}",
         "outputs": 1,
@@ -2028,14 +2031,14 @@
         "y": 1300,
         "wires": [
             [
-                "91cc940a8b7db206"
+                "64d8a1c93a342d6b"
             ]
         ]
     },
     {
-        "id": "91cc940a8b7db206",
+        "id": "64d8a1c93a342d6b",
         "type": "exec",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "command": "",
         "addpay": "payload",
         "append": "",
@@ -2053,9 +2056,9 @@
         ]
     },
     {
-        "id": "94c5a0dfc09520b5",
+        "id": "cc3e3374bdc0d889",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Comando color luces",
         "func": "var comando = flow.get(\"comando_orden\");\nvar comilla = flow.get(\"comilla\");\n\nmsg.payload = comando + comilla + \"Pon dormitorio de color blanco\"+ comilla;\n\nreturn msg;\n",
         "outputs": 1,
@@ -2067,14 +2070,14 @@
         "y": 3140,
         "wires": [
             [
-                "b0d7a952ecb59e23"
+                "63587b4a7a8aa0d0"
             ]
         ]
     },
     {
-        "id": "5eb915eab9be9518",
+        "id": "540ff4884da72c6f",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Conversión a número",
         "rules": [
             {
@@ -2094,14 +2097,14 @@
         "y": 1300,
         "wires": [
             [
-                "043bf2645a3242f4"
+                "14dad26a56799c88"
             ]
         ]
     },
     {
-        "id": "043bf2645a3242f4",
+        "id": "14dad26a56799c88",
         "type": "smooth",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "media",
         "property": "payload",
         "action": "max",
@@ -2113,14 +2116,14 @@
         "y": 1300,
         "wires": [
             [
-                "3895d78537ac21e1"
+                "b94344dc491ee18d"
             ]
         ]
     },
     {
-        "id": "3895d78537ac21e1",
+        "id": "b94344dc491ee18d",
         "type": "change",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Luminosidad_media",
         "rules": [
             {
@@ -2140,14 +2143,14 @@
         "y": 1300,
         "wires": [
             [
-                "93a4bb8c4c958150"
+                "eb164ccc4e233044"
             ]
         ]
     },
     {
-        "id": "95ba93e72df20dca",
+        "id": "01a38e0230f48709",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/inicio",
         "description": "",
@@ -2164,15 +2167,15 @@
         "y": 440,
         "wires": [
             [
-                "19407c7262ad2c39"
+                "c665f06f58b9ba09"
             ],
             []
         ]
     },
     {
-        "id": "5521e08a1a4d1056",
+        "id": "f1c087a996d35308",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Encender sist",
         "func": "var comando = flow.get(\"comando_orden\");\nvar comilla = flow.get(\"comilla\");\n\nmsg.payload = comando + comilla + \"Pon dormitorio de color blanco\"+ comilla;\n\nreturn msg;\n",
         "outputs": 1,
@@ -2184,14 +2187,14 @@
         "y": 320,
         "wires": [
             [
-                "282297b67ad8fb98"
+                "ecaba17a861a77dd"
             ]
         ]
     },
     {
-        "id": "89354a6d619a48e3",
+        "id": "6d94b56becd8fbe2",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Regula el nivel de brillo de las luces en función de la cantidad de luz que entre",
         "info": "",
         "x": 1270,
@@ -2199,9 +2202,9 @@
         "wires": []
     },
     {
-        "id": "eae9caf693ff1047",
+        "id": "fe20c78f76565b8f",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Lo siento \"+msg.originalMessage.from.first_name+\", el sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -2213,14 +2216,14 @@
         "y": 1860,
         "wires": [
             [
-                "20091e22792bf2ac"
+                "e52e630d224c4231"
             ]
         ]
     },
     {
-        "id": "27a32e84ed3dd309",
+        "id": "aad47ea0903809e3",
         "type": "telegram command",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "command": "/iapagar",
         "description": "",
@@ -2237,15 +2240,15 @@
         "y": 760,
         "wires": [
             [
-                "5044f1d957d0dd44"
+                "cbce1e9df37e9811"
             ],
             []
         ]
     },
     {
-        "id": "ff9fd52e28331d27",
+        "id": "27ca7128c7151ee6",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Apagado manual",
         "info": "",
         "x": 1460,
@@ -2253,9 +2256,9 @@
         "wires": []
     },
     {
-        "id": "92bb8149276426b5",
+        "id": "e631a6d6f2a2b6aa",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist on",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"El sistema está ya iniciado \"+msg.originalMessage.from.first_name+\". Le refresco los datos: \\n\\nLa temperatura actualmente es de \"+flow.get(\"temperatura\")+\"º y la humedad es de \"+flow.get(\"humedad\")+\". Con estos valores te recomendamos musica \"+flow.get(\"tipo_musica\")+\", con un color de luces \"+flow.get(\"tipo_luces\")+\"\\nSi esta de acuerdo escriba el comando /continua \\n\\nSi prefiere otro tipo de escena escriba uno de los siguientes comandos: \\n/triste \\n/alegre \\n/chill (musica tranquila) \\n/bailar\\n\\n Si simplemente quiere la luz blanca y estar con sonido instrumental escriba el comando /concentracion\\n\\nSi desea volver al inicio y solo tener luz sin música simplemente escriba el comando /blanco_solo\\n\\n\\n Cuando su sesión termine se apagará el sistema solo, no obstante, puede apagarlo manualmente mediante el comando /apagar\";\n return msg;\n}",
         "outputs": 1,
@@ -2267,14 +2270,14 @@
         "y": 440,
         "wires": [
             [
-                "eaec4df0c98474a1"
+                "bcead55e29daceb2"
             ]
         ]
     },
     {
-        "id": "eaec4df0c98474a1",
+        "id": "bcead55e29daceb2",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -2286,9 +2289,9 @@
         ]
     },
     {
-        "id": "19407c7262ad2c39",
+        "id": "c665f06f58b9ba09",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -2311,17 +2314,17 @@
         "y": 420,
         "wires": [
             [
-                "fe6e0205424e206f"
+                "d4b52702f5982f89"
             ],
             [
-                "92bb8149276426b5"
+                "e631a6d6f2a2b6aa"
             ]
         ]
     },
     {
-        "id": "5044f1d957d0dd44",
+        "id": "cbce1e9df37e9811",
         "type": "switch",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "property": "Estado_sistema",
         "propertyType": "flow",
@@ -2344,17 +2347,17 @@
         "y": 760,
         "wires": [
             [
-                "b22b5e9cda289332"
+                "fe16437d9249a8c2"
             ],
             [
-                "e1df051f48ab064f"
+                "6b3446a6fd9e94df"
             ]
         ]
     },
     {
-        "id": "e1df051f48ab064f",
+        "id": "6b3446a6fd9e94df",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Sist off",
         "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"El sistema está desactivado debido a que no hay nadie asíque no se pondrán los leds ni la música. Si desea, puede iniciarlo manualmente mediante el comando /inicio\";\n return msg;\n}",
         "outputs": 1,
@@ -2366,14 +2369,14 @@
         "y": 760,
         "wires": [
             [
-                "bc679e018eb37595"
+                "df1bcdd2cae57012"
             ]
         ]
     },
     {
-        "id": "bc679e018eb37595",
+        "id": "df1bcdd2cae57012",
         "type": "telegram sender",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "",
         "bot": "f0a162a1c048ea61",
         "haserroroutput": false,
@@ -2385,9 +2388,9 @@
         ]
     },
     {
-        "id": "67048463560d824c",
+        "id": "72f43d36fe225eaf",
         "type": "comment",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Guarda los datos recibidos en la base de datos",
         "info": "",
         "x": 880,
@@ -2395,9 +2398,9 @@
         "wires": []
     },
     {
-        "id": "4aa783298c529e99",
+        "id": "51252525f5862e6e",
         "type": "function",
-        "z": "d209909e0e46f2d8",
+        "z": "d52572a34c4747ee",
         "name": "Encender sist",
         "func": "var comando = flow.get(\"comando_orden\");\nvar comilla = flow.get(\"comilla\");\n\nmsg.payload = comando +  comilla + \"Pon volumen al 3\" + comilla;\n\nreturn msg;\n",
         "outputs": 1,
@@ -2409,9 +2412,156 @@
         "y": 360,
         "wires": [
             [
-                "282297b67ad8fb98"
+                "ecaba17a861a77dd"
             ]
         ]
+    },
+    {
+        "id": "b0c69e992ae731d4",
+        "type": "mqtt out",
+        "z": "d52572a34c4747ee",
+        "name": "",
+        "topic": "infind/ESPNOW/Sistema",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "519a5214787aa647",
+        "x": 650,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "da937fe4da2f9189",
+        "type": "comment",
+        "z": "d52572a34c4747ee",
+        "name": "Topic sistema activado o desactivado",
+        "info": "",
+        "x": 310,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "aaf33ab1c481dda7",
+        "type": "function",
+        "z": "d52572a34c4747ee",
+        "name": "",
+        "func": "var temp=flow.get(\"temp\");\nvar est=flow.get(\"Estado_sistema\"); \n\nif(temp>=20 && temp<=26) //entre 20 y 26 grados temperatura agradable\n{\nmsg.payload=0;\nflow.set(\"aire\",0);\n}\nelse //si no enciendo el aire y establezco temperatura a 24\n{\nmsg.payload=1;\nflow.set(\"aire\",1);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 940,
+        "wires": [
+            [
+                "b0c69e992ae731d4"
+            ]
+        ]
+    },
+    {
+        "id": "23b630a1680f192f",
+        "type": "function",
+        "z": "d52572a34c4747ee",
+        "name": "",
+        "func": "msg.payload=flow.get(\"Estado_sistema\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 80,
+        "wires": [
+            [
+                "dd5a564cf3a6181f"
+            ]
+        ]
+    },
+    {
+        "id": "e7171441a38f9c82",
+        "type": "function",
+        "z": "d52572a34c4747ee",
+        "name": "",
+        "func": "\nmsg.payload=flow.get(\"aire\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "65b7e2c4af658848"
+            ]
+        ]
+    },
+    {
+        "id": "dd5a564cf3a6181f",
+        "type": "ui_led",
+        "z": "d52572a34c4747ee",
+        "order": 0,
+        "group": "f079cee4c752a9ad",
+        "width": 0,
+        "height": 0,
+        "label": "Sistema On/Off",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 670,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "65b7e2c4af658848",
+        "type": "ui_led",
+        "z": "d52572a34c4747ee",
+        "order": 1,
+        "group": "f079cee4c752a9ad",
+        "width": 0,
+        "height": 0,
+        "label": "Aire Acondicionado On/Off",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 670,
+        "y": 120,
+        "wires": []
     },
     {
         "id": "23e23252c67e0cc3",
@@ -2505,6 +2655,42 @@
         "useselfsignedcertificate": false,
         "sslterminated": false,
         "verboselogging": false
+    },
+    {
+        "id": "519a5214787aa647",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f079cee4c752a9ad",
+        "type": "ui_group",
+        "name": "Estados",
+        "tab": "5cf964493340939d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "5cf964493340939d",
