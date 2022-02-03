@@ -9,7 +9,7 @@ Proyecto de asistencia en iluminación, temperatura y música para un usuario en
 
 
 # Configuración Hardware
-En esta sección se indicarán los requisitos imprescindibles a configurar de forma previa en los equipos Hardaware del sistema para que este funcione correctamente. Estos se realizarán solo la primera vez que se instale el sistema: \n
+En esta sección se indicarán los requisitos imprescindibles a configurar de forma previa en los equipos Hardaware del sistema para que este funcione correctamente. Estos se realizarán solo la primera vez que se instale el sistema:
 -Conexiones de sensores y alimentaciones de la placa (foto de sensor de presencia)
 -Conectar Alexa
 # Configuración Software
