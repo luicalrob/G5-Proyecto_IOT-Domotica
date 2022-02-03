@@ -16,8 +16,9 @@ En esta sección se indicarán los requisitos imprescindibles a configurar de fo
 En esta sección se indicarán los requisitos imprescindibles a configurar del sistema, estas configuraciones solo habrá que realizarlas la primera vez que lo queramos usar
 -Activar la máquina virtual y la carpeta de OTA en la máquina virtual
 -Configuración de conexión wifi en cada una de las placas (wifi y contraseña) y subir el nuevo archivo en FOTA //(explicar qué lineas de código habría que modificar, y como exportar binario a FOTA)
--Conexión del bot de Telegram: abrimos telegram en nuestro dispositivo elegido, y dentro buscamos al bot llamado "Prealexa"
+-Conexión del bot de Telegram: en cada nodo de telegram que usamos en nodered introducimos el nombre de nuestro bot "PrealexaInfind_bot", y para terminar de configurarlo introducimos también el token correspondiente a este bot "5121583786:AAEQTfxxUHKg-U4mgAbPM-ZAC-D-uZhyNYM"
 -Declaración de Macs de cada una de las placas a utilizar en el proyecto que se van a utilizar (indicar que programa usar para obtener las macs y donde poner cada mac)
+-Configurar alexa en nodered: tras haber configurado el dispositivo alexa con nodered (obtención del token y configuración con la cuenta de amazon) usamos unos nodos llamados exed para usar el comando que queramos que interprete alexa pero en vez de introducirlo por voz, lo introducimos por una señal, en este caso por telegram. 
 
 # Instrucciones de uso
 -Encender máquina virtual y abrir nodeRed
