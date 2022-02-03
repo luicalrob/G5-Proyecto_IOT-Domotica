@@ -9,6 +9,17 @@ Anthony Elder
  */
 #include <ESP8266WiFi.h>
 #include "PubSubClient.h"
+#include <ArduinoJson.h>
+WiFiClient wClient;
+PubSubClient mqtt_client(wClient);
+
+//Infrarrojo, aire acondicionado
+#include <Arduino.h>
+#include <IRremoteESP8266.h>
+#include <IRsend.h>
+#include <ir_Mitsubishi.h>
+const uint16_t kIrLed = 4;  // ESP8266 GPIO pin to use. Recommended: 4 (D2).
+IRMitsubishiAC ac(kIrLed);  // Set the GPIO used for sending messages.
 
 extern "C" {
   #include "user_interface.h"
@@ -32,11 +43,11 @@ extern "C" {
                                                         // Name of firmware
 #define HTTP_OTA_VERSION      String(__FILE__).substring(String(__FILE__).lastIndexOf('\\')+1) + ".nodemcu" 
 //
-const char* ssid = "MiFibra-1738";
-const char* password = "zn6TAwZx";
+//const char* ssid = "MiFibra-1738";
+//const char* password = "zn6TAwZx";
 //
-//const char* ssid = "Araceli";
-//const char* password = "chinitonto";
+const char* ssid = "MIWIFI_2G_sfPG";
+const char* password = "Sx5ihL4q";
 
 // GPIOs
 int LED_blink = 2;
@@ -104,6 +115,14 @@ void progreso_OTA(int x, int todo)
 
 
 
+//SUBSCRIBIR A TOPIC
+const char* mqtt_server = "iot.ac.uma.es";
+const char* mqtt_user = "II5";
+const char* mqtt_pass = "2X3TlFVH";
+
+#define topic_SUB "infind/ESPNOW/Sistema"
+
+
 
 //-------- Customise the above values --------
 #define SENDTOPIC "infind/ESPNow/key"
@@ -130,10 +149,60 @@ uint8_t mac[] = {0xF6, 0xCF, 0xA2, 0x68, 0x68, 0xFC};// your MAC
 void initVariant() {
   //wifi_set_macaddr(SOFTAP_IF, &mac[0]);
 }
-//char *ssid      = "infind";               // Set you WiFi SSID
-//char *password  = "1518wifi";               // Set you WiFi password
 
 
+//----------------//Infrarrojo, aire acondicionado//---------//
+void printState() {
+  // Display the settings.
+  Serial.println("Mitsubishi A/C remote is in the following state:");
+  Serial.printf("  %s\n", ac.toString().c_str());
+  // Display the encoded IR sequence.
+  unsigned char* ir_code = ac.getRaw();
+  Serial.print("IR Code: 0x");
+  for (uint8_t i = 0; i < kMitsubishiACStateLength; i++)
+    Serial.printf("%02X", ir_code[i]);
+  Serial.println();
+}
+int estado_anterior=0;
+int estado_actual=0;
+//-----------------------------------------------------
+void callback(char* topic, byte* payload, unsigned int length) {
+  char *mensaje = (char *)malloc(length+1); // reservo memoria para copia del mensaje
+  strncpy(mensaje, (char*)payload, length); // copio el mensaje en cadena de caracteres
+  mensaje[length]='\0'; // caracter cero marca el final de la cadena
+  Serial.printf("Mensaje recibido [%s] %s\n", topic, mensaje);
+  // compruebo el topic
+  
+  if(strcmp(topic, topic_SUB)==0) 
+  {
+    if (mensaje[0] == '1') {
+        digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level 
+          ac.on();
+          estado_actual=1;
+          
+      } else {
+        digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
+        ac.off();
+        estado_actual=0;
+      }
+      if(estado_anterior==estado_actual)
+      {}
+      else
+      {
+        estado_anterior=estado_actual;
+          #if SEND_MITSUBISHI_AC
+          Serial.println("Sending IR command to A/C ...");
+          ac.send();
+          #endif  // SEND_MITSUBISHI_AC
+          printState();
+      }
+          
+  }
+  free(mensaje);
+}
+
+
+//----------------------------------------------------------------//
 IPAddress server(192, 168, 1, 36);//your MQTT Broker address
 
 const char deviceTopic[] = "ESPNOW/";
@@ -183,7 +252,18 @@ int heartBeat;
 
 void setup() {
   Serial.begin(115200);
-
+  //aire aondicionado
+    ac.begin();
+  ac.setFan(1);
+  ac.setMode(kMitsubishiAcCool);
+  ac.setTemp(24);
+  ac.setVane(kMitsubishiAcVaneAuto);
+  
+  //Subcribir
+  mqtt_client.setServer(mqtt_server, 1883);
+  mqtt_client.setBufferSize(512); // para poder enviar mensajes de hasta X bytes
+  mqtt_client.setCallback(callback);
+  
   //FOTA//
   pinMode(LED_blink, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
   pinMode(LED_OTA, OUTPUT); 
@@ -352,6 +432,7 @@ void reconnectMQTT() {
       if (client.connect(clientId.c_str(),"infind","zancudo")) {
       Serial.println("connected");
       // Once connected, publish an announcement...
+      mqtt_client.subscribe(topic_SUB);
       client.publish(SERVICETOPIC, "I am live");
       // ... and resubscribe
       //  client.subscribe("inTopic");
